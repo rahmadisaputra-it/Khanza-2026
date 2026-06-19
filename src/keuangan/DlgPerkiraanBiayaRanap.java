@@ -181,12 +181,19 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
         }
         tbNilaiRS.setDefaultRenderer(Object.class, new WarnaTable());
         
-        tabModeNilaiINACBG=new DefaultTableModel(null,new Object[]{
+                tabModeNilaiINACBG=new DefaultTableModel(null,new Object[]{
                 "Keterangan","Lama Inap","Biaya","Diagnosa Penyerta","Prosedur"
             }){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+             @Override public boolean isCellEditable(int rowIndex, int colIndex){
+                 boolean a = false;
+                 if (colIndex==2) {
+                     a=true;
+                 }
+                 return a;
+             }
+
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,java.lang.Object.class,java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -212,6 +219,28 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
             }
         }
         tbNilaiINACBG.setDefaultRenderer(Object.class, new WarnaTable());
+        
+        tbNilaiINACBG.getModel().addTableModelListener(new javax.swing.event.TableModelListener() {
+            @Override
+            public void tableChanged(javax.swing.event.TableModelEvent e) {
+                if (e.getType() == javax.swing.event.TableModelEvent.UPDATE) {
+                    int row = e.getFirstRow();
+                    int col = e.getColumn();
+                    
+                    if (col == 2 && tbDiagnosa.getSelectedRow() != -1) {
+                        try {
+                            String kdPenyakit = tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(), 0).toString();
+                            String biayaBaru = tbNilaiINACBG.getValueAt(row, 2).toString();
+                            
+                            Sequel.queryu("REPLACE INTO inacbg_dummy (kd_penyakit, biaya) VALUES ('" + kdPenyakit + "', '" + biayaBaru + "')");
+                            
+                        } catch (Exception ex) {
+                            System.out.println("Gagal simpan dummy: " + ex);
+                        }
+                    }
+                }
+            }
+        });
 
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         Diagnosa.setDocument(new batasInput((int)100).getKata(Diagnosa));
@@ -1096,6 +1125,25 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         ps.close();
                     }
                 }
+                
+                if (tabModeNilaiINACBG.getRowCount() == 0) {
+                    try {
+                        String penyakitDiklik = tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),0).toString();
+                        // Ambil nilai dummy dari database
+                        double nilaiDummy = Sequel.cariIsiAngka("SELECT biaya FROM inacbg_dummy WHERE kd_penyakit='" + penyakitDiklik + "'");
+                        
+                        tabModeNilaiINACBG.addRow(new Object[]{
+                            "Input Dummy (Double Click Biaya >>)", 
+                            "-", 
+                            Math.round(nilaiDummy), 
+                            "-", 
+                            "-"
+                        });
+                    } catch (Exception ex) {
+                        System.out.println("Gagal load baris dummy: " + ex);
+                    }
+                }
+                
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             }
