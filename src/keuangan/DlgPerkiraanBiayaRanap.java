@@ -263,6 +263,7 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
         MnJadikanPerkiraan = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         MnJadikanPerkiraan1 = new javax.swing.JMenuItem();
+        MnTambahPerkiraan = new javax.swing.JMenuItem();
         jPopupMenu3 = new javax.swing.JPopupMenu();
         MnJadikanPerkiraan2 = new javax.swing.JMenuItem();
         MnPerkiraanBiayaManual = new javax.swing.JMenuItem();
@@ -336,6 +337,22 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
             }
         });
         jPopupMenu2.add(MnJadikanPerkiraan1);
+
+        MnTambahPerkiraan.setBackground(new java.awt.Color(255, 255, 254));
+        MnTambahPerkiraan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnTambahPerkiraan.setForeground(java.awt.Color.darkGray);
+        MnTambahPerkiraan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnTambahPerkiraan.setText("Tambah Perkiraan Biaya Ranap");
+        MnTambahPerkiraan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnTambahPerkiraan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnTambahPerkiraan.setName("MnTambahPerkiraan"); // NOI18N
+        MnTambahPerkiraan.setPreferredSize(new java.awt.Dimension(250, 28));
+        MnTambahPerkiraan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnTambahPerkiraanActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(MnTambahPerkiraan);
 
         jPopupMenu3.setName("jPopupMenu3"); // NOI18N
 
@@ -1299,6 +1316,42 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         } 
     }//GEN-LAST:event_formWindowOpened
 
+    private void MnTambahPerkiraanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnTambahPerkiraanActionPerformed
+        if(tbBangsal.getSelectedRow()!= -1){
+            if(tbDiagnosa.getSelectedRow()!= -1){
+                if(tbNilaiINACBG.getSelectedRow()!= -1){
+                    double existingTarif = Sequel.cariIsiAngka("select tarif from perkiraan_biaya_ranap where no_rawat=?", tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+                    
+                    double newTarif = 0;
+                    try {
+                        newTarif = Double.parseDouble(tbNilaiINACBG.getValueAt(tbNilaiINACBG.getSelectedRow(),2).toString());
+                    } catch (Exception e) {
+                        newTarif = 0;
+                    }
+                    
+                    double totalTarif = existingTarif + newTarif;
+                    
+                    Sequel.meghapus("perkiraan_biaya_ranap","no_rawat",tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+                    if(Sequel.menyimpantf2("perkiraan_biaya_ranap","?,?,?","data",3,new String[]{
+                            tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString(),
+                            tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),0).toString(),
+                            String.valueOf(totalTarif)
+                        })==true){
+                        runBackground(() ->tampil());
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Gagal menambahkan perkiraan biaya pasien ...!!");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Silahkan Anda pilih dulu perkiraan biaya pasien yang mau ditambahkan ...!!");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Silahkan Anda pilih dulu diagnosa pasien yang mau ditambahkan perkiraannya ...!!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"Silahkan Anda pilih dulu pasien yang mau ditambahkan perkiraannya ...!!");
+        }        
+    }//GEN-LAST:event_MnTambahPerkiraanActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1332,6 +1385,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private javax.swing.JMenuItem MnJadikanPerkiraan1;
     private javax.swing.JMenuItem MnJadikanPerkiraan2;
     private javax.swing.JMenuItem MnPerkiraanBiayaManual;
+    private javax.swing.JMenuItem MnTambahPerkiraan;
     private widget.TextBox NilaiPerkiraanManual;
     private widget.TextBox NmBangsal;
     private widget.ScrollPane Scroll;
@@ -1537,14 +1591,38 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     diag="";
                     perkiraantarif=0;
                     pros="Aman";
-                    ps2=koneksi.prepareStatement(
-                        "select perkiraan_biaya_ranap.kd_penyakit,perkiraan_biaya_ranap.tarif from perkiraan_biaya_ranap where perkiraan_biaya_ranap.no_rawat=?");  
+                    
+//                    ps2=koneksi.prepareStatement(
+//                        "select group_concat(diagnosa_pasien.kd_penyakit separator ', ') as kd_penyakit, " +
+//                        "sum(inacbg_dummy.biaya) as tarif " +
+//                        "from diagnosa_pasien " +
+//                        "inner join inacbg_dummy on diagnosa_pasien.kd_penyakit=inacbg_dummy.kd_penyakit " +
+//                        "where diagnosa_pasien.no_rawat=?"); 
+                    
+                      ps2=koneksi.prepareStatement(
+                        "select group_concat(diagnosa_pasien.kd_penyakit separator ', ') as kd_penyakit, " +
+                        "sum(ifnull(inacbg_dummy.biaya, 0)) as tarif " +
+                        "from diagnosa_pasien " +
+                        "left join inacbg_dummy on TRIM(diagnosa_pasien.kd_penyakit)=TRIM(inacbg_dummy.kd_penyakit) " +
+                        "where diagnosa_pasien.no_rawat=?");
                     try{
                         ps2.setString(1,rs.getString("no_rawat"));
                         rs2=ps2.executeQuery();
                         if(rs2.next()){
                             diag=rs2.getString("kd_penyakit");
+                            if(diag == null) {
+                                diag = "";
+                            }
                             perkiraantarif=rs2.getDouble("tarif");
+                            
+                            if (perkiraantarif == 0) {
+                                double manualTarif = Sequel.cariIsiAngka("select tarif from perkiraan_biaya_ranap where no_rawat=?", rs.getString("no_rawat"));
+                                if (manualTarif > 0) {
+                                    perkiraantarif = manualTarif;
+                                    diag = Sequel.cariIsi("select kd_penyakit from perkiraan_biaya_ranap where no_rawat=?", rs.getString("no_rawat"));
+                                }
+                            }
+                            
                             if(perkiraantarif<=Jumlah){
                                 pros="Tidak Aman";  
                             }
