@@ -1209,6 +1209,17 @@ import ziscsr.ZISPengeluaranPenerimaDankes;
 import ziscsr.ZISPenghasilanPenerimaDankes;
 import ziscsr.ZISTernakPenerimaDankes;
 import ziscsr.ZISUkuranRumahPenerimaDankes;
+//custum sirs
+import bridging.ApiKemenkesSirs;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -1272,7 +1283,7 @@ public class frmUtama extends javax.swing.JFrame {
                 DlgLogin.setOpacity(0.74f);
             }     
         }catch(Exception e){            
-        } 
+        }
     }
     
     public static frmUtama getInstance() {
@@ -24251,7 +24262,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             System.out.println("Notifikasi : Silahkan hubungi administrator ");
         }
     }
-
+    
     private void isTutup() {
         FlayMenu.setVisible(false);
         akses.setform("frmUtama");

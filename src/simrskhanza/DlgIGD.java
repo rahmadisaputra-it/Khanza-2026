@@ -532,6 +532,10 @@ public final class DlgIGD extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        MnPendaftaran = new javax.swing.JMenu();
+        MnEvaluasiKelengkapanRM = new javax.swing.JMenuItem();
+        MnCatatanMasukKeluarRI = new javax.swing.JMenuItem();
+        MnNaikKelas = new javax.swing.JMenuItem();
         MnDataRM = new javax.swing.JMenu();
         MnRMIGD = new javax.swing.JMenu();
         MnDataTriaseIGD = new javax.swing.JMenuItem();
@@ -840,6 +844,61 @@ public final class DlgIGD extends javax.swing.JDialog {
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
+
+        MnPendaftaran.setBackground(new java.awt.Color(255, 255, 254));
+        MnPendaftaran.setForeground(new java.awt.Color(50, 50, 50));
+        MnPendaftaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPendaftaran.setText("Pendaftaran");
+        MnPendaftaran.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPendaftaran.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPendaftaran.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPendaftaran.setName("MnPendaftaran"); // NOI18N
+        MnPendaftaran.setPreferredSize(new java.awt.Dimension(200, 26));
+
+        MnEvaluasiKelengkapanRM.setBackground(new java.awt.Color(255, 255, 254));
+        MnEvaluasiKelengkapanRM.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnEvaluasiKelengkapanRM.setForeground(new java.awt.Color(50, 50, 50));
+        MnEvaluasiKelengkapanRM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnEvaluasiKelengkapanRM.setText("Lembar Evaluasi Kelengkapan Berkas RM");
+        MnEvaluasiKelengkapanRM.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnEvaluasiKelengkapanRM.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnEvaluasiKelengkapanRM.setName("MnEvaluasiKelengkapanRM"); // NOI18N
+        MnEvaluasiKelengkapanRM.setPreferredSize(new java.awt.Dimension(330, 26));
+        MnEvaluasiKelengkapanRM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnEvaluasiKelengkapanRMActionPerformed(evt);
+            }
+        });
+
+        MnCatatanMasukKeluarRI.setBackground(new java.awt.Color(255, 255, 254));
+        MnCatatanMasukKeluarRI.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCatatanMasukKeluarRI.setForeground(new java.awt.Color(50, 50, 50));
+        MnCatatanMasukKeluarRI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCatatanMasukKeluarRI.setText("Catatan Masuk & Keluar RI");
+        MnCatatanMasukKeluarRI.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCatatanMasukKeluarRI.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCatatanMasukKeluarRI.setName("MnCatatanMasukKeluarRI"); // NOI18N
+        MnCatatanMasukKeluarRI.setPreferredSize(new java.awt.Dimension(280, 26));
+        MnCatatanMasukKeluarRI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCatatanMasukKeluarRIActionPerformed(evt);
+            }
+        });
+
+        MnNaikKelas.setBackground(new java.awt.Color(255, 255, 254));
+        MnNaikKelas.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnNaikKelas.setForeground(new java.awt.Color(50, 50, 50));
+        MnNaikKelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnNaikKelas.setText("Surat Pernyataan Naik Kelas");
+        MnNaikKelas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnNaikKelas.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnNaikKelas.setName("MnNaikKelas"); // NOI18N
+        MnNaikKelas.setPreferredSize(new java.awt.Dimension(280, 26));
+        MnNaikKelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnNaikKelasActionPerformed(evt);
+            }
+        });
 
         MnDataRM.setBackground(new java.awt.Color(255, 255, 254));
         MnDataRM.setForeground(new java.awt.Color(50, 50, 50));
@@ -1853,6 +1912,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             }
         });
         
+        jPopupMenu1.add(MnPendaftaran);
         jPopupMenu1.add(MnDataRM);
 
         MnPermintaan.setBackground(new java.awt.Color(255, 255, 254));
@@ -9857,6 +9917,24 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }//GEN-LAST:event_MnPersetujuanUmumActionPerformed
 
+    private void MnEvaluasiKelengkapanRMActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO: Cetak RM 01 - Lembar Evaluasi Kelengkapan Berkas Rekam Medis
+        // Tunggu file rptEvaluasiKelengkapanRM.jasper tersedia
+        JOptionPane.showMessageDialog(null, "Fitur sedang dalam pengembangan.");
+    }
+
+    private void MnCatatanMasukKeluarRIActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO: Cetak RM 03 - Catatan Masuk & Keluar Rawat Inap
+        // Tunggu file rptCatatanMasukKeluarRI.jasper tersedia
+        JOptionPane.showMessageDialog(null, "Fitur sedang dalam pengembangan.");
+    }
+
+    private void MnNaikKelasActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO: Cetak Surat Pernyataan Naik Kelas
+        // Tunggu file rptSuratNaikKelas.jasper tersedia
+        JOptionPane.showMessageDialog(null, "Fitur sedang dalam pengembangan.");
+    }
+
     private void MnTransferAntarRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnTransferAntarRuangActionPerformed
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
@@ -12543,6 +12621,10 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenuItem MnChecklistPreOperasi;
     private javax.swing.JMenuItem MnCopyResep;
     private javax.swing.JMenuItem MnDIrawat;
+    private javax.swing.JMenu MnPendaftaran;
+    private javax.swing.JMenuItem MnEvaluasiKelengkapanRM;
+    private javax.swing.JMenuItem MnCatatanMasukKeluarRI;
+    private javax.swing.JMenuItem MnNaikKelas;
     private javax.swing.JMenu MnDataRM;
     private javax.swing.JMenuItem MnDataTriaseIGD;
     private javax.swing.JMenuItem MnDiagnosa;
@@ -14540,5 +14622,13 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         
         MnRMHCU.add(MnCheckListKriteriaMasukNICU);
         MnRMHCU.add(MnCheckListKriteriaMasukPICU);
+
+        MnPendaftaran.add(MnEvaluasiKelengkapanRM);
+        MnPendaftaran.add(MnPersetujuanUmum);
+        MnPendaftaran.add(MnPersetujuanRawatInap);
+        MnPendaftaran.add(MnCatatanMasukKeluarRI);
+        MnPendaftaran.add(MnPernyataanPasienUmum);
+        MnPendaftaran.add(MnNaikKelas);
+        MnPendaftaran.add(MnPernyataanMemilihDPJP);
     }
 }

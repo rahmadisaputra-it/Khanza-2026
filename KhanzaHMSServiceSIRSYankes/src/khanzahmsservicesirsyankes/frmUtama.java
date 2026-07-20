@@ -5,7 +5,7 @@
  */
 package khanzahmsservicesirsyankes;
 
-import fungsi.SirsApi;
+import bridging.ApiKemenkesSirs;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import java.awt.event.ActionEvent;
@@ -23,6 +23,7 @@ import javax.swing.Timer;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 
 /**
  *
@@ -32,8 +33,8 @@ public class frmUtama extends javax.swing.JFrame {
     private  Properties prop = new Properties();
     private  Connection koneksi=koneksiDB.condb();
     private  sekuel Sequel=new sekuel();
-    private  String requestXML,URL="";
-    private  SirsApi api=new SirsApi();
+    private  String requestXML,URL="",utc="",requestJson="", namabed="";
+    private  ApiKemenkesSirs api=new ApiKemenkesSirs();
     private  HttpHeaders headers;
     private  HttpEntity requestEntity;
     private  PreparedStatement ps;
@@ -69,6 +70,7 @@ public class frmUtama extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TeksArea = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIMKES Khanza Service SIRANAP");
@@ -87,12 +89,91 @@ public class frmUtama extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, java.awt.BorderLayout.PAGE_END);
 
+        jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, java.awt.BorderLayout.LINE_END);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            koneksi=koneksiDB.condb();
+            TeksArea.append("Memulai update Siranap\n");
+            ps=koneksi.prepareStatement(
+                    "select siranap_ketersediaan_kamar.kode_ruang_siranap,siranap_ketersediaan_kamar.kelas_ruang_siranap,siranap_ketersediaan_kamar.kd_bangsal," +
+                    "bangsal.nm_bangsal,siranap_ketersediaan_kamar.kelas,siranap_ketersediaan_kamar.kapasitas," +
+                    "siranap_ketersediaan_kamar.tersedia,siranap_ketersediaan_kamar.tersediapria," +
+                    "siranap_ketersediaan_kamar.tersediawanita,siranap_ketersediaan_kamar.menunggu " +
+                    "from siranap_ketersediaan_kamar inner join bangsal on siranap_ketersediaan_kamar.kd_bangsal=bangsal.kd_bangsal");
+            try {
+                rs=ps.executeQuery();
+                while(rs.next()){
+                    TeksArea.append("Mengirimkan kamar "+rs.getString("kode_ruang_siranap")+" "+rs.getString("nm_bangsal")+"\n");
+                    try {    
+                        totaltt=Sequel.cariInteger("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"'");
+                        tersedia=Sequel.cariInteger("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and status='KOSONG' and kd_bangsal='"+rs.getString("kd_bangsal")+"'");
+                        terpakai=Sequel.cariInteger("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and status='ISI' and kd_bangsal='"+rs.getString("kd_bangsal")+"'");
+                        menunggu=Sequel.cariInteger("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and status='DIBERSIHKAN' and kd_bangsal='"+rs.getString("kd_bangsal")+"'");
+                        namabed=Sequel.cariIsi("select nm_bangsal from bangsal where status='1' and kd_bangsal=?",rs.getString("kd_bangsal"));
+                        headers = new HttpHeaders();
+                        headers.setContentType(MediaType.APPLICATION_JSON);
+                        headers.add("X-rs-id",koneksiDB.IDSIRS()); 
+                        utc=String.valueOf(api.GetUTCdatetimeAsString());
+                        headers.add("X-Timestamp",utc);
+                        headers.add("X-pass",koneksiDB.PASSSIRS()); 
+                       // headers.add("Content-Type","application/xml; charset=ISO-8859-1");
+                        requestJson ="{" +
+                            "\"id_tt\": \""+rs.getString("kelas_ruang_siranap").substring(0,2)+"\",\n" +
+                            "\"ruang\": \""+namabed+"\",\n" +
+                            "\"jumlah_ruang\": \""+totaltt+"\",\n" +
+                            "\"jumlah\": \""+totaltt+"\",\n" +
+                            "\"terpakai\": \""+terpakai+"\",\n" +
+                            "\"terpakai_suspek\": 0,\n" +
+                            "\"terpakai_konfirmasi\":0,\n" +
+                            "\"antrian\": 0,\n" +
+                            "\"prepare\": 0,\n" +
+                            "\"prepare_plan\": 0,\n" +
+                            "\"covid\": 0,\n" +
+                            "\"terpakai_dbd\": 0,\n" +
+                            "\"terpakai_dbd_anak\": 0,\n" +
+                            "\"terpakai_flu_singapura\": 0,\n" +
+                            "\"terpakai_flu_singapura_anak\": 0,\n" +
+                            "\"terpakai_lainnya\": \""+totaltt+"\"" +
+                                                      "}";           
+                        //TeksArea.append("JSON dikirim : "+requestXML+"\n");
+                        requestEntity = new HttpEntity(requestJson,headers);
+                        requestJson=api.getRest().exchange(URL, HttpMethod.PUT, requestEntity, String.class).getBody();
+                        TeksArea.append("respon WS Kemkes : "+requestJson+"\n");
+                    }catch (Exception ex) {
+                        System.out.println("Notifikasi Bridging : "+ex);
+                    }
+                }
+            } catch (Exception ex) {
+                System.out.println("Notif Ketersediaan : "+ex);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+            TeksArea.append("Proses update selesai\n");
+            
+        } catch (Exception ez) {
+            System.out.println("Notif : "+ez);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,6 +213,7 @@ public class frmUtama extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea TeksArea;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
     private void jam(){
@@ -193,28 +275,36 @@ public class frmUtama extends javax.swing.JFrame {
                                     tersedia=Sequel.cariInteger("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and status='KOSONG' and kd_bangsal='"+rs.getString("kd_bangsal")+"'");
                                     terpakai=Sequel.cariInteger("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and status='ISI' and kd_bangsal='"+rs.getString("kd_bangsal")+"'");
                                     menunggu=Sequel.cariInteger("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and status='DIBERSIHKAN' and kd_bangsal='"+rs.getString("kd_bangsal")+"'");
+                                    namabed=Sequel.cariIsi("select nm_bangsal from bangsal where status='1' and kd_bangsal=?",rs.getString("kd_bangsal"));
                                     headers = new HttpHeaders();
+                                    headers.setContentType(MediaType.APPLICATION_JSON);
                                     headers.add("X-rs-id",koneksiDB.IDSIRS()); 
-                                    headers.add("X-pass",api.getHmac()); 
-                                    headers.add("Content-Type","application/xml; charset=ISO-8859-1");
-                                    requestXML ="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
-                                    "<xml>\n"+    
-                                        "<data>\n"+
-                                            "<kode_ruang>"+rs.getString("kelas_ruang_siranap").substring(0,4)+"</kode_ruang>\n"+
-                                            "<tipe_pasien>"+rs.getString("kode_ruang_siranap").substring(0,4)+"</tipe_pasien>\n"+
-                                            "<total_TT>"+Integer.toString(totaltt)+"</total_TT>\n"+
-                                            "<terpakai_male>"+Integer.toString(terpakai)+"</terpakai_male>\n"+
-                                            "<terpakai_female>"+Integer.toString(terpakai)+"</terpakai_female>\n"+
-                                            "<kosong_male>"+Integer.toString(tersedia)+"</kosong_male>\n"+
-                                            "<kosong_female>"+Integer.toString(tersedia)+"</kosong_female>\n"+
-                                            "<waiting>"+Integer.toString(menunggu)+"</waiting>\n"+
-                                            "<tgl_update>"+dateFormat.format(date)+"</tgl_update>\n"+
-                                        "</data>\n"+
-                                    "</xml>";              
-                                    TeksArea.append("JSON dikirim : "+requestXML+"\n");
-                                    requestEntity = new HttpEntity(requestXML,headers);
-                                    requestXML=api.getRest().exchange(URL+"/ranap", HttpMethod.POST, requestEntity, String.class).getBody();
-                                    TeksArea.append("respon WS BPJS : "+requestXML+"\n");
+                                    utc=String.valueOf(api.GetUTCdatetimeAsString());
+                                    headers.add("X-Timestamp",utc);
+                                    headers.add("X-pass",koneksiDB.PASSSIRS()); 
+                                   // headers.add("Content-Type","application/xml; charset=ISO-8859-1");
+                                    requestJson ="{" +
+                                        "\"id_tt\": \""+rs.getString("kelas_ruang_siranap").substring(0,2)+"\",\n" +
+                                        "\"ruang\": \""+namabed+"\",\n" +
+                                        "\"jumlah_ruang\": \""+totaltt+"\",\n" +
+                                        "\"jumlah\": \""+totaltt+"\",\n" +
+                                        "\"terpakai\": \""+terpakai+"\",\n" +
+                                        "\"terpakai_suspek\": 0,\n" +
+                                        "\"terpakai_konfirmasi\":0,\n" +
+                                        "\"antrian\": 0,\n" +
+                                        "\"prepare\": 0,\n" +
+                                        "\"prepare_plan\": 0,\n" +
+                                        "\"covid\": 0,\n" +
+                                        "\"terpakai_dbd\": 0,\n" +
+                                        "\"terpakai_dbd_anak\": 0,\n" +
+                                        "\"terpakai_flu_singapura\": 0,\n" +
+                                        "\"terpakai_flu_singapura_anak\": 0,\n" +
+                                        "\"terpakai_lainnya\": \""+totaltt+"\"" +
+                                                                  "}";           
+                                    //TeksArea.append("JSON dikirim : "+requestXML+"\n");
+                                    requestEntity = new HttpEntity(requestJson,headers);
+                                    requestJson=api.getRest().exchange(URL, HttpMethod.PUT, requestEntity, String.class).getBody();
+                                    TeksArea.append("respon WS Kemkes : "+requestJson+"\n");
                                 }catch (Exception ex) {
                                     System.out.println("Notifikasi Bridging : "+ex);
                                 }
