@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * DlgLhtBiaya.java
- *
- * Created on 12 Jul 10, 16:21:34
- */
-
 package keuangan;
 
 import fungsi.WarnaTable;
@@ -72,6 +61,7 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
     private int i=0;
     private WebEngine engine;
     
+    
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -116,7 +106,7 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
             }else if(i==22){
                 column.setPreferredWidth(85);
             }else if(i==23){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(100);
             }else{
                 column.setPreferredWidth(75);
             }
@@ -1592,41 +1582,48 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     perkiraantarif=0;
                     pros="Aman";
                     
-//                    ps2=koneksi.prepareStatement(
-//                        "select group_concat(diagnosa_pasien.kd_penyakit separator ', ') as kd_penyakit, " +
-//                        "sum(inacbg_dummy.biaya) as tarif " +
-//                        "from diagnosa_pasien " +
-//                        "inner join inacbg_dummy on diagnosa_pasien.kd_penyakit=inacbg_dummy.kd_penyakit " +
-//                        "where diagnosa_pasien.no_rawat=?"); 
+                    // Ambil diagnosa_awal dari kamar_inap (berisi kode ICD-10 dipisah koma, contoh: "F20, I50")
+                    String diagnosaAwal = rs.getString("diagnosa_awal");
+                    diag = (diagnosaAwal != null && !diagnosaAwal.trim().equals("-")) ? diagnosaAwal.trim() : "";
                     
-                      ps2=koneksi.prepareStatement(
-                        "select group_concat(diagnosa_pasien.kd_penyakit separator ', ') as kd_penyakit, " +
-                        "sum(ifnull(inacbg_dummy.biaya, 0)) as tarif " +
-                        "from diagnosa_pasien " +
-                        "left join inacbg_dummy on TRIM(diagnosa_pasien.kd_penyakit)=TRIM(inacbg_dummy.kd_penyakit) " +
-                        "where diagnosa_pasien.no_rawat=?");
-                    try{
-                        ps2.setString(1,rs.getString("no_rawat"));
-                        rs2=ps2.executeQuery();
-                        if(rs2.next()){
-                            diag=rs2.getString("kd_penyakit");
-                            if(diag == null) {
-                                diag = "";
-                            }
-                            perkiraantarif=rs2.getDouble("tarif");
-                            
-                            if (perkiraantarif == 0) {
-                                double manualTarif = Sequel.cariIsiAngka("select tarif from perkiraan_biaya_ranap where no_rawat=?", rs.getString("no_rawat"));
-                                if (manualTarif > 0) {
-                                    perkiraantarif = manualTarif;
-                                    diag = Sequel.cariIsi("select kd_penyakit from perkiraan_biaya_ranap where no_rawat=?", rs.getString("no_rawat"));
-                                }
-                            }
-                            
-                            if(perkiraantarif<=Jumlah){
-                                pros="Tidak Aman";  
-                            }
+                    // Jika diagnosa_awal ada, pecah per kode lalu jumlahkan biaya dari inacbg_dummy
+                    if (!diag.isEmpty()) {
+                        String[] kdArray = diag.split(",");
+                        for (String kd : kdArray) {
+                            double biayaKd = Sequel.cariIsiAngka(
+                                "select biaya from inacbg_dummy where TRIM(kd_penyakit)=TRIM(?)",
+                                kd.trim()
+                            );
+                            perkiraantarif += biayaKd;
                         }
+                    }
+                    
+                    // Jika dari diagnosa_awal tidak dapat (0), coba dari input manual (perkiraan_biaya_ranap)
+                    if (perkiraantarif == 0) {
+                        double manualTarif = Sequel.cariIsiAngka("select tarif from perkiraan_biaya_ranap where no_rawat=?", rs.getString("no_rawat"));
+                        if (manualTarif > 0) {
+                            perkiraantarif = manualTarif;
+                        }
+                    }
+                    
+                    if (perkiraantarif > 0) {
+                        double persentase = (Jumlah / perkiraantarif) * 100;
+                        if (persentase >= 100) {
+                            pros = "Tidak Aman";
+                        } else if (persentase >= 80) {
+                            pros = "Mendekati";
+                        } else {
+                            pros = "Aman";
+                        }
+                    } else {
+                        if (perkiraantarif <= Jumlah) {
+                            pros = "Tidak Aman";  
+                        }
+                    }
+                    
+                    try{
+                        // dummy try block to maintain finally structure below
+                        rs2=null;
                     } catch (Exception e) {
                         System.out.println("Notif : "+e);
                     } finally{
