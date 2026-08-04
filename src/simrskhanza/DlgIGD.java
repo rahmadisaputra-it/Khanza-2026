@@ -110,6 +110,7 @@ import rekammedis.RMChecklistPreOperasi;
 import rekammedis.RMDataAsuhanGizi;
 import rekammedis.RMDataCatatanCairanHemodialisa;
 import rekammedis.RMDataCatatanCekGDS;
+import rekammedis.RMDataCatatanMasukKeluar;
 import rekammedis.RMDataCatatanKeperawatanRalan;
 import rekammedis.RMDataCatatanKeseimbanganCairan;
 import rekammedis.RMDataCatatanObservasiBayi;
@@ -9924,9 +9925,25 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }
 
     private void MnCatatanMasukKeluarRIActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO: Cetak RM 03 - Catatan Masuk & Keluar Rawat Inap
-        // Tunggu file rptCatatanMasukKeluarRI.jasper tersedia
-        JOptionPane.showMessageDialog(null, "Fitur sedang dalam pengembangan.");
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
+            TNoRM.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data pasien dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMDataCatatanMasukKeluar form = new RMDataCatatanMasukKeluar(null, false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20, internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
     }
 
     private void MnNaikKelasActionPerformed(java.awt.event.ActionEvent evt) {
