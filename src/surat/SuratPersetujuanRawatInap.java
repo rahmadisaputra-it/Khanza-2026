@@ -68,10 +68,10 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Persetujuan","No.Rawat","No.R.M.","Nama Pasien","Umur","J.K.","Tgl.Lahir","Tanggal","Nama Pembuat Persetujuan", 
-            "No.KTP P.P.","Pendidikan P.P.","Alamat Pembuat Persetujuan","No.Telp P.P.","Ruang Dipilih","Kelas Ruang",
+            "Tgl.Lahir P.P.","J.K. P.P.","No.KTP P.P.","Pendidikan P.P.","Alamat Pembuat Persetujuan","No.Telp P.P.","Ruang Dipilih","Kelas Ruang",
             "Persetujuan Terhadap","Hak Kelas","Nama & Alamat Keluarga Terdekat","Pembayaran/Pembiayaan","NIP","Nama Petugas"
         }){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+             @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbObat.setModel(tabMode);
 
@@ -227,7 +227,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         NmPetugas = new widget.TextBox();
         BtnPetugas = new widget.Button();
         jLabel16 = new widget.Label();
-        Tanggal = new widget.Tanggal();
+        LahirPj = new widget.Tanggal();
         jLabel14 = new widget.Label();
         jLabel3 = new widget.Label();
         NoSurat = new widget.TextBox();
@@ -248,6 +248,10 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         jLabel26 = new widget.Label();
         NamaKeluarga = new widget.TextBox();
         jLabel27 = new widget.Label();
+        Tanggal1 = new widget.Tanggal();
+        jLabel28 = new widget.Label();
+        JkPj = new widget.ComboBox();
+        jLabel29 = new widget.Label();
         ChkInput = new widget.CekBox();
         PanelAccor = new widget.PanelBiasa();
         ChkAccor = new widget.CekBox();
@@ -659,24 +663,29 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         FormInput.add(BtnPetugas);
         BtnPetugas.setBounds(483, 40, 28, 23);
 
-        jLabel16.setText("Tanggal :");
+        jLabel16.setText("Tgl. Lahir PJ. :");
         jLabel16.setName("jLabel16"); // NOI18N
         jLabel16.setVerifyInputWhenFocusTarget(false);
         FormInput.add(jLabel16);
-        jLabel16.setBounds(0, 40, 70, 23);
+        jLabel16.setBounds(740, 90, 100, 23);
 
-        Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-02-2026" }));
-        Tanggal.setDisplayFormat("dd-MM-yyyy");
-        Tanggal.setName("Tanggal"); // NOI18N
-        Tanggal.setOpaque(false);
-        Tanggal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TanggalKeyPressed(evt);
+        LahirPj.setForeground(new java.awt.Color(50, 70, 50));
+        LahirPj.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-02-2026" }));
+        LahirPj.setDisplayFormat("dd-MM-yyyy");
+        LahirPj.setName("LahirPj"); // NOI18N
+        LahirPj.setOpaque(false);
+        LahirPj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LahirPjActionPerformed(evt);
             }
         });
-        FormInput.add(Tanggal);
-        Tanggal.setBounds(74, 40, 90, 23);
+        LahirPj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                LahirPjKeyPressed(evt);
+            }
+        });
+        FormInput.add(LahirPj);
+        LahirPj.setBounds(850, 90, 90, 23);
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Pembuat Persetujuan :");
@@ -817,6 +826,45 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         FormInput.add(jLabel27);
         jLabel27.setBounds(16, 210, 180, 23);
 
+        Tanggal1.setForeground(new java.awt.Color(50, 70, 50));
+        Tanggal1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
+        Tanggal1.setDisplayFormat("dd-MM-yyyy");
+        Tanggal1.setName("Tanggal1"); // NOI18N
+        Tanggal1.setOpaque(false);
+        Tanggal1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Tanggal1ActionPerformed(evt);
+            }
+        });
+        Tanggal1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Tanggal1KeyPressed(evt);
+            }
+        });
+        FormInput.add(Tanggal1);
+        Tanggal1.setBounds(74, 40, 90, 23);
+
+        jLabel28.setText("Tanggal :");
+        jLabel28.setName("jLabel28"); // NOI18N
+        jLabel28.setVerifyInputWhenFocusTarget(false);
+        FormInput.add(jLabel28);
+        jLabel28.setBounds(0, 40, 70, 23);
+
+        JkPj.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "L", "P" }));
+        JkPj.setName("JkPj"); // NOI18N
+        JkPj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JkPjKeyPressed(evt);
+            }
+        });
+        FormInput.add(JkPj);
+        JkPj.setBounds(850, 120, 115, 23);
+
+        jLabel29.setText("Jenis Kelamin PJ. :");
+        jLabel29.setName("jLabel29"); // NOI18N
+        FormInput.add(jLabel29);
+        jLabel29.setBounds(740, 120, 100, 23);
+
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -954,15 +1002,18 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         }else if(NoSurat.getText().trim().equals("")){
             Valid.textKosong(NoSurat,"No.Persetujuan");
         }else{
-            if(Sequel.menyimpantf("surat_persetujuan_rawat_inap","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",15,new String[]{
-                    NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),NamaPJ.getText(),NoKTP.getText(),
-                    PendidikanPJ.getSelectedItem().toString(),AlamatPj.getText(),NoTelp.getText(),RuangDipilih.getText(),
+            if(Sequel.menyimpantf("surat_persetujuan_rawat_inap","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",17,new String[]{
+                    NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(LahirPj.getSelectedItem()+""),NamaPJ.getText(),
+                    Valid.SetTgl(LahirPj.getSelectedItem()+""),JkPj.getSelectedItem().toString(), // <- Tambahan di sini
+                    NoKTP.getText(),PendidikanPJ.getSelectedItem().toString(),AlamatPj.getText(),NoTelp.getText(),RuangDipilih.getText(),
                     KelasDipilih.getSelectedItem().toString(),Hubungan.getSelectedItem().toString(),HakKelas.getSelectedItem().toString(),
                     NamaKeluarga.getText(),Pembiayaan.getText(),KdPetugas.getText()
                 })==true){
                 tabMode.addRow(new Object[]{
                     NoSurat.getText(),TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Umur.getText(),JK.getText(),LahirPasien.getText(),
-                    Valid.SetTgl(Tanggal.getSelectedItem()+""),NamaPJ.getText(),NoKTP.getText(),PendidikanPJ.getSelectedItem().toString(),
+                    Valid.SetTgl(LahirPj.getSelectedItem()+""),NamaPJ.getText(),
+                    Valid.SetTgl(LahirPj.getSelectedItem()+""),JkPj.getSelectedItem().toString(), // <- Tambahan di sini
+                    NoKTP.getText(),PendidikanPJ.getSelectedItem().toString(),
                     AlamatPj.getText(),NoTelp.getText(),RuangDipilih.getText(),KelasDipilih.getSelectedItem().toString(),Hubungan.getSelectedItem().toString(),
                     HakKelas.getSelectedItem().toString(),NamaKeluarga.getText(),Pembiayaan.getText(),KdPetugas.getText(),NmPetugas.getText()
                 });
@@ -1250,7 +1301,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatKeyReleased
 
     private void BtnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPetugasKeyPressed
-        Valid.pindah(evt,Tanggal,NamaPJ);
+        Valid.pindah(evt,LahirPj,NamaPJ);
     }//GEN-LAST:event_BtnPetugasKeyPressed
 
     private void BtnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPetugasActionPerformed
@@ -1309,13 +1360,13 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
         }else{
-            Valid.pindah(evt,TCari,Tanggal);
+            Valid.pindah(evt,TCari,LahirPj);
         }
     }//GEN-LAST:event_TNoRwKeyPressed
 
-    private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
+    private void LahirPjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LahirPjKeyPressed
         //Valid.pindah(evt,TCari,Jam);
-    }//GEN-LAST:event_TanggalKeyPressed
+    }//GEN-LAST:event_LahirPjKeyPressed
 
     private void NoSuratKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoSuratKeyPressed
         Valid.pindah(evt,BtnPetugas,NamaPJ);
@@ -1400,7 +1451,9 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                 param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),20).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),19).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
                 Valid.MyReportqry("rptSuratPersetujuanPasienRawatInap.jasper","report","::[ Surat Persetujuan Pasien Rawat Inap ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,pasien.pekerjaan,reg_periksa.umurdaftar,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.sttsumur,pasien.tmp_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat_pasien,"+
-		    "surat_persetujuan_rawat_inap.tanggal,surat_persetujuan_rawat_inap.nama_pj,surat_persetujuan_rawat_inap.no_ktppj,surat_persetujuan_rawat_inap.pendidikan_pj,surat_persetujuan_rawat_inap.alamatpj,surat_persetujuan_rawat_inap.no_telppj,surat_persetujuan_rawat_inap.ruang,surat_persetujuan_rawat_inap.kelas,surat_persetujuan_rawat_inap.hubungan,surat_persetujuan_rawat_inap.hak_kelas,"+
+		    "surat_persetujuan_rawat_inap.tanggal,surat_persetujuan_rawat_inap.nama_pj," +
+                    "surat_persetujuan_rawat_inap.tgl_lahir_pj,surat_persetujuan_rawat_inap.jk_pj," +
+                    "surat_persetujuan_rawat_inap.no_ktppj,surat_persetujuan_rawat_inap.pendidikan_pj,surat_persetujuan_rawat_inap.alamatpj,surat_persetujuan_rawat_inap.no_telppj,surat_persetujuan_rawat_inap.ruang,surat_persetujuan_rawat_inap.kelas,surat_persetujuan_rawat_inap.hubungan,surat_persetujuan_rawat_inap.hak_kelas,"+
                     "surat_persetujuan_rawat_inap.nama_alamat_keluarga_terdekat,surat_persetujuan_rawat_inap.bayar_secara,surat_persetujuan_rawat_inap.nip,petugas.nama,surat_persetujuan_rawat_inap.no_surat from surat_persetujuan_rawat_inap inner join reg_periksa on surat_persetujuan_rawat_inap.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join petugas on surat_persetujuan_rawat_inap.nip=petugas.nip inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
                     "where surat_persetujuan_rawat_inap.no_surat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
@@ -1434,6 +1487,22 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
             });
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void LahirPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LahirPjActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LahirPjActionPerformed
+
+    private void Tanggal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tanggal1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Tanggal1ActionPerformed
+
+    private void Tanggal1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tanggal1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Tanggal1KeyPressed
+
+    private void JkPjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JkPjKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JkPjKeyPressed
 
     /**
     * @param args the command line arguments
@@ -1474,10 +1543,12 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
     private widget.ComboBox HakKelas;
     private widget.ComboBox Hubungan;
     private widget.TextBox JK;
+    private widget.ComboBox JkPj;
     private widget.TextBox KdPetugas;
     private widget.ComboBox KelasDipilih;
     private widget.Label LCount;
     private widget.TextBox LahirPasien;
+    private widget.Tanggal LahirPj;
     private widget.editorpane LoadHTML;
     private widget.editorpane LoadHTML2;
     private widget.TextBox NamaKeluarga;
@@ -1497,7 +1568,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
-    private widget.Tanggal Tanggal;
+    private widget.Tanggal Tanggal1;
     private widget.TextBox Umur;
     private widget.Button btnAmbil;
     private widget.InternalFrame internalFrame1;
@@ -1519,6 +1590,8 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
     private widget.Label jLabel25;
     private widget.Label jLabel26;
     private widget.Label jLabel27;
+    private widget.Label jLabel28;
+    private widget.Label jLabel29;
     private widget.Label jLabel3;
     private widget.Label jLabel4;
     private widget.Label jLabel6;
@@ -1538,6 +1611,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(
                     "select surat_persetujuan_rawat_inap.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
                     "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_persetujuan_rawat_inap.tanggal,surat_persetujuan_rawat_inap.nama_pj,"+
+                    "surat_persetujuan_rawat_inap.tgl_lahir_pj,surat_persetujuan_rawat_inap.jk_pj," +
                     "surat_persetujuan_rawat_inap.no_ktppj,surat_persetujuan_rawat_inap.pendidikan_pj,surat_persetujuan_rawat_inap.alamatpj,"+
                     "surat_persetujuan_rawat_inap.no_telppj,surat_persetujuan_rawat_inap.ruang,surat_persetujuan_rawat_inap.kelas,"+
                     "surat_persetujuan_rawat_inap.hubungan,surat_persetujuan_rawat_inap.hak_kelas,surat_persetujuan_rawat_inap.nama_alamat_keluarga_terdekat,"+
@@ -1550,6 +1624,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(
                     "select surat_persetujuan_rawat_inap.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
                     "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_persetujuan_rawat_inap.tanggal,surat_persetujuan_rawat_inap.nama_pj,"+
+                    "surat_persetujuan_rawat_inap.tgl_lahir_pj,surat_persetujuan_rawat_inap.jk_pj," +
                     "surat_persetujuan_rawat_inap.no_ktppj,surat_persetujuan_rawat_inap.pendidikan_pj,surat_persetujuan_rawat_inap.alamatpj,"+
                     "surat_persetujuan_rawat_inap.no_telppj,surat_persetujuan_rawat_inap.ruang,surat_persetujuan_rawat_inap.kelas,"+
                     "surat_persetujuan_rawat_inap.hubungan,surat_persetujuan_rawat_inap.hak_kelas,surat_persetujuan_rawat_inap.nama_alamat_keluarga_terdekat,"+
@@ -1584,6 +1659,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_surat"),rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
+                        rs.getDate("tgl_lahir_pj"),rs.getString("jk_pj"),
                         rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),rs.getString("jk"),rs.getDate("tgl_lahir"),
                         rs.getString("tanggal"),rs.getString("nama_pj"),rs.getString("no_ktppj"),rs.getString("pendidikan_pj"),
                         rs.getString("alamatpj"),rs.getString("no_telppj"),rs.getString("ruang"),rs.getString("kelas"),
@@ -1619,8 +1695,8 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         RuangDipilih.setText("");
         NoKTP.setText("");
         AlamatPj.setText("");
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_persetujuan_rawat_inap.no_surat,3),signed)),0) from surat_persetujuan_rawat_inap where surat_persetujuan_rawat_inap.tanggal='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",
-                "PRI"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoSurat);
+        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_persetujuan_rawat_inap.no_surat,3),signed)),0) from surat_persetujuan_rawat_inap where surat_persetujuan_rawat_inap.tanggal='"+Valid.SetTgl(LahirPj.getSelectedItem()+"")+"' ",
+                "PRI"+LahirPj.getSelectedItem().toString().substring(6,10)+LahirPj.getSelectedItem().toString().substring(3,5)+LahirPj.getSelectedItem().toString().substring(0,2),3,NoSurat);
         NamaPJ.requestFocus();
     }
 
@@ -1635,17 +1711,19 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
             JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             LahirPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
             NamaPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            NoKTP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            PendidikanPJ.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            AlamatPj.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            NoTelp.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            RuangDipilih.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            KelasDipilih.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            Hubungan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            HakKelas.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            NamaKeluarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            Pembiayaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
+            Valid.SetTgl(LahirPj,tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+            JkPj.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            NoKTP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            PendidikanPJ.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+            AlamatPj.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            NoTelp.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+            RuangDipilih.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+            KelasDipilih.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+            Hubungan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
+            HakKelas.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
+            NamaKeluarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
+            Pembiayaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
+            Valid.SetTgl(LahirPj,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
         }
     }
 
@@ -1724,10 +1802,11 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
     }
   
     private void ganti() {
-        if(Sequel.mengedittf("surat_persetujuan_rawat_inap","no_surat=?","no_surat=?,no_rawat=?,tanggal=?,nama_pj=?,no_ktppj=?,pendidikan_pj=?,alamatpj=?,"+
-            "no_telppj=?,ruang=?,kelas=?,hubungan=?,hak_kelas=?,nama_alamat_keluarga_terdekat=?,bayar_secara=?,nip=?",16,new String[]{
-            NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),NamaPJ.getText(),NoKTP.getText(),
-            PendidikanPJ.getSelectedItem().toString(),AlamatPj.getText(),NoTelp.getText(),RuangDipilih.getText(),
+        if(Sequel.mengedittf("surat_persetujuan_rawat_inap","no_surat=?","no_surat=?,no_rawat=?,tanggal=?,nama_pj=?,tgl_lahir_pj=?,jk_pj=?,no_ktppj=?,pendidikan_pj=?,alamatpj=?,"+
+            "no_telppj=?,ruang=?,kelas=?,hubungan=?,hak_kelas=?,nama_alamat_keluarga_terdekat=?,bayar_secara=?,nip=?",18,new String[]{
+            NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(LahirPj.getSelectedItem()+""),NamaPJ.getText(),
+            Valid.SetTgl(LahirPj.getSelectedItem()+""),JkPj.getSelectedItem().toString(), // <- Tambahan di sini
+            NoKTP.getText(),PendidikanPJ.getSelectedItem().toString(),AlamatPj.getText(),NoTelp.getText(),RuangDipilih.getText(),
             KelasDipilih.getSelectedItem().toString(),Hubungan.getSelectedItem().toString(),HakKelas.getSelectedItem().toString(),
             NamaKeluarga.getText(),Pembiayaan.getText(),KdPetugas.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
@@ -1738,7 +1817,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
             tbObat.setValueAt(Umur.getText(),tbObat.getSelectedRow(),4);
             tbObat.setValueAt(JK.getText(),tbObat.getSelectedRow(),5);
             tbObat.setValueAt(LahirPasien.getText(),tbObat.getSelectedRow(),6);
-            tbObat.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+""),tbObat.getSelectedRow(),7);
+            tbObat.setValueAt(Valid.SetTgl(LahirPj.getSelectedItem()+""),tbObat.getSelectedRow(),7);
             tbObat.setValueAt(NamaPJ.getText(),tbObat.getSelectedRow(),8);
             tbObat.setValueAt(NoKTP.getText(),tbObat.getSelectedRow(),9);
             tbObat.setValueAt(PendidikanPJ.getSelectedItem().toString(),tbObat.getSelectedRow(),10);
