@@ -227,7 +227,6 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
         label14 = new widget.Label();
         KdDokterKonsultan = new widget.TextBox();
         NmDokterKonsultan = new widget.TextBox();
-        BtnDokterKonsultan = new widget.Button();
         jLabel36 = new widget.Label();
         CaraPulang = new widget.ComboBox();
         jLabel16 = new widget.Label();
@@ -634,7 +633,7 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-08-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -648,7 +647,7 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-08-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -800,24 +799,6 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
         NmDokterKonsultan.setPreferredSize(new java.awt.Dimension(207, 23));
         FormInput.add(NmDokterKonsultan);
         NmDokterKonsultan.setBounds(206, 40, 200, 23);
-
-        BtnDokterKonsultan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnDokterKonsultan.setMnemonic('2');
-        BtnDokterKonsultan.setToolTipText("Alt+2");
-        BtnDokterKonsultan.setName("BtnDokterKonsultan"); // NOI18N
-        BtnDokterKonsultan.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnDokterKonsultan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnDokterKonsultanActionPerformed(evt);
-            }
-        });
-        BtnDokterKonsultan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnDokterKonsultanKeyPressed(evt);
-            }
-        });
-        FormInput.add(BtnDokterKonsultan);
-        BtnDokterKonsultan.setBounds(409, 40, 28, 23);
 
         jLabel36.setText("Golongan Operasi :");
         jLabel36.setName("jLabel36"); // NOI18N
@@ -1299,7 +1280,7 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
         }else{            
-            Valid.pindah(evt,TCari,BtnDokterKonsultan);
+            Valid.pindah(evt,TCari,NamaTindakanOperasi);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
 
@@ -1311,7 +1292,7 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
         if(TNoRw.getText().trim().equals("")||TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
         }else if(KdDokterKonsultan.getText().trim().equals("")||NmDokterKonsultan.getText().trim().equals("")){
-            Valid.textKosong(BtnDokterKonsultan,"Dokter Penanggung Jawab");
+            Valid.textKosong(KdDokterKonsultan,"Dokter Penanggung Jawab");
         }else{
             if(Sequel.menyimpantf("catatan_masuk_keluar","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "No.Rawat", 28, new String[]{
                 TNoRw.getText(),
@@ -1412,7 +1393,7 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
         if(TNoRw.getText().equals("")||TNoRM.getText().equals("")||TPasien.getText().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
         }else if(KdDokterKonsultan.getText().equals("")||NmDokterKonsultan.getText().equals("")){
-            Valid.textKosong(BtnDokterKonsultan,"Dokter Penanggung Jawab");
+            Valid.textKosong(KdDokterKonsultan,"Dokter Penanggung Jawab");
         }else{
             if(tbObat.getSelectedRow()>-1){
                 if(akses.getkode().equals("Admin Utama")){
@@ -1565,37 +1546,6 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
     private void KdDokterKonsultanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdDokterKonsultanKeyPressed
         Valid.pindah(evt,TCari,NamaTindakanOperasi);
     }//GEN-LAST:event_KdDokterKonsultanKeyPressed
-
-    private void BtnDokterKonsultanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDokterKonsultanActionPerformed
-        if (dokter == null || !dokter.isDisplayable()) {
-            dokter=new DlgCariDokter(null,false);
-            dokter.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            dokter.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    if(dokter.getTable().getSelectedRow()!= -1){        
-                         KdDokterKonsultan.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                         NmDokterKonsultan.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                    }  
-                    BtnDokterKonsultan.requestFocus();
-                    dokter=null;
-                }
-            });
-            dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-            dokter.setLocationRelativeTo(internalFrame1);
-        }   
-        if (dokter == null) return;
-        dokter.isCek();
-        if (dokter.isVisible()) {
-            dokter.toFront();
-            return;
-        }
-        dokter.setVisible(true);
-    }//GEN-LAST:event_BtnDokterKonsultanActionPerformed
-
-    private void BtnDokterKonsultanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKonsultanKeyPressed
-       Valid.pindah(evt,TCari,NamaTindakanOperasi);
-    }//GEN-LAST:event_BtnDokterKonsultanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
         isForm();
@@ -1903,13 +1853,36 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             param.put("norawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),3).toString():finger)+"\n"+Valid.SetTgl3(Keluar.getText()));
+            String nmDokterMenerima = "";
+            String kdDokterMenerima = "";
+            finger = "";
+            try {
+                java.sql.PreparedStatement psk = koneksi.prepareStatement("select reg_periksa.kd_dokter,dokter.nm_dokter from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter where reg_periksa.no_rawat=?");
+                try {
+                    psk.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                    java.sql.ResultSet rsk = psk.executeQuery();
+                    if(rsk.next()){
+                        kdDokterMenerima = rsk.getString("kd_dokter");
+                        nmDokterMenerima = rsk.getString("nm_dokter");
+                        finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kdDokterMenerima);
+                        if(finger.equals("")){
+                            finger=kdDokterMenerima;
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : "+e);
+                } finally {
+                    if(psk!=null) psk.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : "+e);
+            }
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+nmDokterMenerima+"\nID "+finger+"\n"+Valid.SetTgl3(Keluar.getText()));
             try {
                 ps=koneksi.prepareStatement("select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>?");
                 try {
                     ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-                    ps.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+                    ps.setString(2,kdDokterMenerima);
                     rs=ps.executeQuery();
                     i=2;
                     while(rs.next()){
@@ -1970,7 +1943,6 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
     private widget.Button BtnCari;
     private widget.Button BtnClosePhrase;
     private widget.Button BtnCloseUrl;
-    private widget.Button BtnDokterKonsultan;
     private widget.Button BtnDownloadBukaFile;
     private widget.Button BtnDownloadFile;
     private widget.Button BtnEdit;
@@ -2280,15 +2252,16 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
             System.out.println("Notif isRawat CaraMasuk: " + e);
         }
 
-        // ── 3. Dokter Konsultan: ambil dari rawat_inap_dr ─────────────────────────
+        // ── 3. Dokter Konsultan: ambil dari dpjp_ranap ─────────────────────────
         try {
+            String drMenerima = Sequel.cariIsi("select kd_dokter from reg_periksa where no_rawat=?", TNoRw.getText());
             ps = koneksi.prepareStatement(
-                "select rawat_inap_dr.kd_dokter, dokter.nm_dokter " +
-                "from rawat_inap_dr " +
-                "inner join dokter on dokter.kd_dokter=rawat_inap_dr.kd_dokter " +
-                "where rawat_inap_dr.no_rawat=? " +
-                "order by rawat_inap_dr.tgl_perawatan desc limit 1");
+                "select dpjp_ranap.kd_dokter, dokter.nm_dokter " +
+                "from dpjp_ranap " +
+                "inner join dokter on dokter.kd_dokter=dpjp_ranap.kd_dokter " +
+                "where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>?");
             ps.setString(1, TNoRw.getText());
+            ps.setString(2, drMenerima);
             rs = ps.executeQuery();
             if(rs.next()){
                 if(KdDokterKonsultan.getText().trim().equals("")){
@@ -2409,7 +2382,7 @@ public final class RMDataCatatanMasukKeluar extends javax.swing.JDialog {
         BtnPrint.setEnabled(akses.getdata_resume_pasien());      
         if(akses.getjml2()>=1){
             KdDokterKonsultan.setEditable(false);
-            BtnDokterKonsultan.setEnabled(false);
+            // BtnDokterKonsultan.setEnabled(false);
             KdDokterKonsultan.setText(akses.getkode());
             NmDokterKonsultan.setText(Sequel.CariDokter(KdDokterKonsultan.getText()));
             if(NmDokterKonsultan.getText().equals("")){

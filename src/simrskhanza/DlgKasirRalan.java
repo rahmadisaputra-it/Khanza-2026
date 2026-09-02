@@ -301,6 +301,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         initKasirRalan();
+        initMenuPoliklinik();
 
         this.setLocation(8,1);
         setSize(885,674);
@@ -16453,6 +16454,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnBilling.setEnabled(akses.getbilling_ralan());
         MnHemodialisa.setEnabled(akses.gethemodialisa());
         MnDataRalan.setEnabled(akses.gettindakan_ralan());
+        if(MnDataRalanPoli != null) MnDataRalanPoli.setEnabled(akses.gettindakan_ralan());
         MnDataRalan1.setEnabled(akses.gettindakan_ralan());
         MnDataPemberianObat.setEnabled(akses.getberi_obat());
         MnDataPemberianObat1.setEnabled(akses.getberi_obat());
@@ -16480,6 +16482,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         ppIKP1.setEnabled(akses.getinsiden_keselamatan_pasien());    
         MnJadwalOperasi.setEnabled(akses.getbooking_operasi());      
         MnSuratKontrol.setEnabled(akses.getskdp_bpjs()); 
+        if(MnSuratKontrolPoli != null) MnSuratKontrolPoli.setEnabled(akses.getskdp_bpjs());
         MnPermintaanLab.setEnabled(akses.getpermintaan_lab());
         MnPermintaanRadiologi.setEnabled(akses.getpermintaan_radiologi());
         MnJadwalOperasi1.setEnabled(akses.getbooking_operasi());   
@@ -16489,6 +16492,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnCetakSuratSakit.setEnabled(akses.getsurat_sakit());
         ppResume.setEnabled(akses.getdata_resume_pasien());
         MnPenilaianAwalKeperawatanRalan.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
+        if(MnPenilaianAwalKeperawatanRalanPoli != null) MnPenilaianAwalKeperawatanRalanPoli.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
+        MnPenilaianAwalMedisRalan.setEnabled(akses.getpenilaian_awal_medis_ralan());
         MnPenilaianAwalKeperawatanGigi.setEnabled(akses.getpenilaian_awal_keperawatan_gigi());
         MnPenilaianAwalKeperawatanKebidanan.setEnabled(akses.getpenilaian_awal_keperawatan_kebidanan());
         MnPenilaianAwalKeperawatanBayiAnak.setEnabled(akses.getpenilaian_awal_keperawatan_anak());
@@ -18677,5 +18682,77 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnSuratPersetujuan.add(MnSuratPermohonanPrivasi);
         MnSuratPersetujuan.add(MnSuratPermintaanSecondOpinion);
         MnSuratPersetujuan.add(MnSuratPenolakanResusitasi);
+    }
+
+    private javax.swing.JMenu MnPoliklinik;
+    private javax.swing.JMenuItem MnSuratKontrolPoli;
+    private javax.swing.JMenuItem MnPenilaianAwalKeperawatanRalanPoli;
+    private javax.swing.JMenuItem MnDataRalanPoli;
+
+    private void initMenuPoliklinik() {
+        MnPoliklinik = new javax.swing.JMenu();
+        MnPoliklinik.setBackground(new java.awt.Color(255, 255, 254));
+        MnPoliklinik.setForeground(new java.awt.Color(50, 50, 50));
+        MnPoliklinik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnPoliklinik.setText("Poliklinik");
+        MnPoliklinik.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnPoliklinik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPoliklinik.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPoliklinik.setName("MnPoliklinik"); 
+        MnPoliklinik.setPreferredSize(new java.awt.Dimension(250, 26));
+
+        MnPenilaianAwalKeperawatanRalanPoli = new javax.swing.JMenuItem();
+        MnPenilaianAwalKeperawatanRalanPoli.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianAwalKeperawatanRalanPoli.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnPenilaianAwalKeperawatanRalanPoli.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianAwalKeperawatanRalanPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnPenilaianAwalKeperawatanRalanPoli.setText("Pengkajian Awal Keperawatan Umum");
+        MnPenilaianAwalKeperawatanRalanPoli.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianAwalKeperawatanRalanPoli.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianAwalKeperawatanRalanPoli.setPreferredSize(new java.awt.Dimension(270, 26));
+        MnPenilaianAwalKeperawatanRalanPoli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPenilaianAwalKeperawatanRalanActionPerformed(evt);
+            }
+        });
+        MnPoliklinik.add(MnPenilaianAwalKeperawatanRalanPoli);
+
+        MnDataRalanPoli = new javax.swing.JMenuItem();
+        MnDataRalanPoli.setBackground(new java.awt.Color(255, 255, 254));
+        MnDataRalanPoli.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnDataRalanPoli.setForeground(new java.awt.Color(50, 50, 50));
+        MnDataRalanPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnDataRalanPoli.setText("Data Tindakan Rawat Jalan");
+        MnDataRalanPoli.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnDataRalanPoli.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnDataRalanPoli.setPreferredSize(new java.awt.Dimension(270, 26));
+        MnDataRalanPoli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnDataRalanActionPerformed(evt);
+            }
+        });
+        MnPoliklinik.add(MnDataRalanPoli);
+
+        MnPoliklinik.add(MnRMRisikoJatuh);
+        MnPoliklinik.add(MnEdukasi);
+
+        MnSuratKontrolPoli = new javax.swing.JMenuItem();
+        MnSuratKontrolPoli.setBackground(new java.awt.Color(255, 255, 254));
+        MnSuratKontrolPoli.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnSuratKontrolPoli.setForeground(new java.awt.Color(50, 50, 50));
+        MnSuratKontrolPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSuratKontrolPoli.setText("Surat Kontrol");
+        MnSuratKontrolPoli.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSuratKontrolPoli.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSuratKontrolPoli.setName("MnSuratKontrolPoli"); 
+        MnSuratKontrolPoli.setPreferredSize(new java.awt.Dimension(270, 26));
+        MnSuratKontrolPoli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnSuratKontrolActionPerformed(evt);
+            }
+        });
+        MnPoliklinik.add(MnSuratKontrolPoli);
+
+        jPopupMenu1.insert(MnPoliklinik, 0);
     }
 }

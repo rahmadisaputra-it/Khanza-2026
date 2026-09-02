@@ -1112,6 +1112,10 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel23 = new widget.Label();
         AsalRujukan = new widget.TextBox();
         btnPenjab1 = new widget.Button();
+        jLabelKelasBPJS = new widget.Label();
+        CmbKelasBPJS = new widget.ComboBox();
+        jLabelKelasRawat = new widget.Label();
+        CmbKelasRawat = new widget.ComboBox();
         ChkTracker = new widget.CekBox();
         jLabel31 = new widget.Label();
         NoKa = new widget.TextBox();
@@ -6602,6 +6606,26 @@ public final class DlgReg extends javax.swing.JDialog {
         });
         FormInput.add(btnPenjab1);
         btnPenjab1.setBounds(852, 132, 28, 23);
+
+        jLabelKelasBPJS.setText("Kelas BPJS :");
+        jLabelKelasBPJS.setName("jLabelKelasBPJS"); // NOI18N
+        FormInput.add(jLabelKelasBPJS);
+        jLabelKelasBPJS.setBounds(885, 132, 70, 23);
+
+        CmbKelasBPJS.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "VIP", "Kelas 1", "Kelas 2", "Kelas 3" }));
+        CmbKelasBPJS.setName("CmbKelasBPJS"); // NOI18N
+        FormInput.add(CmbKelasBPJS);
+        CmbKelasBPJS.setBounds(960, 132, 90, 23);
+
+        jLabelKelasRawat.setText("Kelas Rawat :");
+        jLabelKelasRawat.setName("jLabelKelasRawat"); // NOI18N
+        FormInput.add(jLabelKelasRawat);
+        jLabelKelasRawat.setBounds(1055, 132, 80, 23);
+
+        CmbKelasRawat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "VIP", "Kelas 1", "Kelas 2", "Kelas 3" }));
+        CmbKelasRawat.setName("CmbKelasRawat"); // NOI18N
+        FormInput.add(CmbKelasRawat);
+        CmbKelasRawat.setBounds(1140, 132, 90, 23);
 
         ChkTracker.setBorder(null);
         ChkTracker.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -16895,11 +16919,15 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.Button btnKel;
     private widget.Button btnPenjab;
     private widget.Button btnPenjab1;
+    private widget.ComboBox CmbKelasBPJS;
+    private widget.ComboBox CmbKelasRawat;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame4;
     private widget.InternalFrame internalFrame5;
     private widget.InternalFrame internalFrame6;
     private widget.Label jLabel10;
+    private widget.Label jLabelKelasBPJS;
+    private widget.Label jLabelKelasRawat;
     private widget.Label jLabel13;
     private widget.Label jLabel14;
     private widget.Label jLabel15;
@@ -17854,38 +17882,53 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             status="Lama";
         }
         
-        if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+        if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",21,
                 new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                 KdDokter.getText(),TNoRM.getText(),kdpoli.getText(),TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),TBiaya.getText(),"Belum",
-                TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status})==true){
+                TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status,
+                CmbKelasBPJS.getSelectedItem().toString(),
+                CmbKelasRawat.getSelectedItem().toString()
+            })==true){
             ceksukses=true;
         }else{
             isNumber();
-            if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+            if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",21,
                     new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                     KdDokter.getText(),TNoRM.getText(),kdpoli.getText(),TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),TBiaya.getText(),"Belum",
-                    TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status})==true){
+                    TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status,
+                    CmbKelasBPJS.getSelectedItem().toString(),
+                    CmbKelasRawat.getSelectedItem().toString()
+                })==true){
                 ceksukses=true;            
             }else{
                 isNumber();
-                if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+                if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",21,
                         new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                         KdDokter.getText(),TNoRM.getText(),kdpoli.getText(),TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),TBiaya.getText(),"Belum",
-                        TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status})==true){
+                        TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status,
+                        CmbKelasBPJS.getSelectedItem().toString(),
+                        CmbKelasRawat.getSelectedItem().toString()
+                    })==true){
                     ceksukses=true;
                 }else{
                     isNumber();
-                    if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+                    if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",21,
                             new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                             KdDokter.getText(),TNoRM.getText(),kdpoli.getText(),TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),TBiaya.getText(),"Belum",
-                            TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status})==true){
+                            TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status,
+                            CmbKelasBPJS.getSelectedItem().toString(),
+                            CmbKelasRawat.getSelectedItem().toString()
+                        })==true){
                         ceksukses=true;
                     }else{
                         isNumber();
-                        if(Sequel.menyimpantf("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+                        if(Sequel.menyimpantf("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",21,
                                 new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                                 KdDokter.getText(),TNoRM.getText(),kdpoli.getText(),TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),TBiaya.getText(),"Belum",
-                                TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status})==true){
+                                TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status,
+                                CmbKelasBPJS.getSelectedItem().toString(),
+                                CmbKelasRawat.getSelectedItem().toString()
+                            })==true){
                             ceksukses=true;            
                         }else{
                             TNoRM.requestFocus();
@@ -17980,11 +18023,12 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     
     private void ganti(){
         if(Sequel.queryu2tf("update reg_periksa set no_rawat=?,no_reg=?,tgl_registrasi=?,jam_reg=?,kd_dokter=?,no_rkm_medis=?,kd_poli=?,"+
-                            "p_jawab=?,almt_pj=?,biaya_reg=?,hubunganpj=?,stts_daftar=?,kd_pj=?,umurdaftar=?,sttsumur=? where no_rawat=?",16,
+                            "p_jawab=?,almt_pj=?,biaya_reg=?,hubunganpj=?,stts_daftar=?,kd_pj=?,umurdaftar=?,sttsumur=?,kelas_bpjs=?,kelas_rawat=? where no_rawat=?",18,
             new String[]{
                 TNoRw.getText(),TNoReg.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                 KdDokter.getText(),TNoRM.getText(),kdpoli.getText(),TPngJwb.getText(),TAlmt.getText(),TBiaya.getText(),THbngn.getText(),
-                TStatus.getText(),kdpnj.getText(),umur,sttsumur,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString()
+                TStatus.getText(),kdpnj.getText(),umur,sttsumur,CmbKelasBPJS.getSelectedItem().toString(),
+                CmbKelasRawat.getSelectedItem().toString(), tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString()
             })==true){
             tabMode.setValueAt(TNoReg.getText(),tbPetugas.getSelectedRow(),1);
             tabMode.setValueAt(TNoRw.getText(),tbPetugas.getSelectedRow(),2);
