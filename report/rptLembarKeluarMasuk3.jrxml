@@ -1804,7 +1804,7 @@ GROUP BY catatan_masuk_keluar.no_rawat]]>
 			<componentElement>
 				<reportElement x="457" y="269" width="79" height="64" uuid="4a864c7c-9fd1-4d0b-8c0e-c235fcff2dc4"/>
 				<ns2:QRCode xmlns:ns2="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<ns2:codeExpression><![CDATA[$P{finger}]]></ns2:codeExpression>
+					<ns2:codeExpression><![CDATA[$P{finger2}]]></ns2:codeExpression>
 				</ns2:QRCode>
 			</componentElement>
 			<rectangle>

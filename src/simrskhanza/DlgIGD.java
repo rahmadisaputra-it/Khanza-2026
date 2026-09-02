@@ -841,6 +841,10 @@ public final class DlgIGD extends javax.swing.JDialog {
         AsalRujukan = new widget.TextBox();
         jLabel23 = new widget.Label();
         btnPenjab1 = new widget.Button();
+        jLabelKelasBPJS = new widget.Label();
+        CmbKelasBPJS = new widget.ComboBox();
+        jLabelKelasRawat = new widget.Label();
+        CmbKelasRawat = new widget.ComboBox();
         ChkTracker = new widget.CekBox();
         ChkInput = new widget.CekBox();
 
@@ -4971,6 +4975,26 @@ public final class DlgIGD extends javax.swing.JDialog {
         FormInput.add(btnPenjab1);
         btnPenjab1.setBounds(852, 132, 28, 23);
 
+        jLabelKelasBPJS.setText("Kelas BPJS :");
+        jLabelKelasBPJS.setName("jLabelKelasBPJS"); // NOI18N
+        FormInput.add(jLabelKelasBPJS);
+        jLabelKelasBPJS.setBounds(885, 132, 70, 23);
+
+        CmbKelasBPJS.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "VIP", "Kelas 1", "Kelas 2", "Kelas 3" }));
+        CmbKelasBPJS.setName("CmbKelasBPJS"); // NOI18N
+        FormInput.add(CmbKelasBPJS);
+        CmbKelasBPJS.setBounds(960, 132, 90, 23);
+
+        jLabelKelasRawat.setText("Kelas Rawat :");
+        jLabelKelasRawat.setName("jLabelKelasRawat"); // NOI18N
+        FormInput.add(jLabelKelasRawat);
+        jLabelKelasRawat.setBounds(1055, 132, 80, 23);
+
+        CmbKelasRawat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "VIP", "Kelas 1", "Kelas 2", "Kelas 3" }));
+        CmbKelasRawat.setName("CmbKelasRawat"); // NOI18N
+        FormInput.add(CmbKelasRawat);
+        CmbKelasRawat.setBounds(1140, 132, 90, 23);
+
         ChkTracker.setBorder(null);
         ChkTracker.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ChkTracker.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -5125,42 +5149,42 @@ public final class DlgIGD extends javax.swing.JDialog {
             if(Sequel.cariInteger("select count(reg_periksa.no_rkm_medis) from reg_periksa where reg_periksa.no_rkm_medis=? and reg_periksa.kd_poli='IGDK'",TNoRM.getText())>0){
                 status="Lama";
             }
-            if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+            if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",21,
                     new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                     KdDokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
-                    TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status})==true){
+                    TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status, CmbKelasBPJS.getSelectedItem().toString(), CmbKelasRawat.getSelectedItem().toString()})==true){
                 ceksukses=true;               
             }else{
                 Kd2.setText("");
                 isNumber();
-                if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+                if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",21,
                         new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                         KdDokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
-                        TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status})==true){
+                        TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status, CmbKelasBPJS.getSelectedItem().toString(), CmbKelasRawat.getSelectedItem().toString()})==true){
                     ceksukses=true;           
                 }else{
                     Kd2.setText("");
                     isNumber();
-                    if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+                    if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",21,
                             new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                             KdDokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
-                            TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status})==true){
+                            TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status, CmbKelasBPJS.getSelectedItem().toString(), CmbKelasRawat.getSelectedItem().toString()})==true){
                         ceksukses=true;              
                     }else{
                         Kd2.setText("");
                         isNumber();
-                        if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+                        if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",21,
                                 new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                                 KdDokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
-                                TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status})==true){
+                                TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status, CmbKelasBPJS.getSelectedItem().toString(), CmbKelasRawat.getSelectedItem().toString()})==true){
                             ceksukses=true;                
                         }else{
                             Kd2.setText("");
                             isNumber();
-                            if(Sequel.menyimpantf("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+                            if(Sequel.menyimpantf("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",21,
                                     new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                                     KdDokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
-                                    TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status})==true){
+                                    TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur,"Belum Bayar",status, CmbKelasBPJS.getSelectedItem().toString(), CmbKelasRawat.getSelectedItem().toString()})==true){
                                 ceksukses=true;               
                             }else{
                                 Kd2.setText("");
@@ -5337,10 +5361,10 @@ public final class DlgIGD extends javax.swing.JDialog {
                 }else{
                     if(akses.getedit_registrasi()==true){
                         if(Sequel.queryu2tf("update reg_periksa set no_rawat=?,no_reg=?,tgl_registrasi=?,jam_reg=?,kd_dokter=?,no_rkm_medis=?,kd_poli=?,"+
-                                "p_jawab=?,almt_pj=?,biaya_reg=?,hubunganpj=?,stts_daftar=?,kd_pj=?,umurdaftar=?,sttsumur=? where no_rawat=?",16,new String[]{
+                                "p_jawab=?,almt_pj=?,biaya_reg=?,hubunganpj=?,stts_daftar=?,kd_pj=?,umurdaftar=?,sttsumur=?,kelas_bpjs=?,kelas_rawat=? where no_rawat=?",18,new String[]{
                                 TNoRw.getText(),TNoReg.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                                 KdDokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),""+biaya,THbngn.getText(),
-                                TStatus.getText(),kdpnj.getText(),umur,sttsumur,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString()
+                                TStatus.getText(),kdpnj.getText(),umur,sttsumur,CmbKelasBPJS.getSelectedItem().toString(), CmbKelasRawat.getSelectedItem().toString(),tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString()
                             })==true){
                             tabMode.setValueAt(TNoReg.getText(),tbPetugas.getSelectedRow(),1);
                             tabMode.setValueAt(TNoRw.getText(),tbPetugas.getSelectedRow(),2);
@@ -12794,11 +12818,15 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.Button btnKel;
     private widget.Button btnPenjab;
     private widget.Button btnPenjab1;
+    private widget.ComboBox CmbKelasBPJS;
+    private widget.ComboBox CmbKelasRawat;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame4;
     private widget.InternalFrame internalFrame5;
     private widget.InternalFrame internalFrame6;
     private widget.Label jLabel10;
+    private widget.Label jLabelKelasBPJS;
+    private widget.Label jLabelKelasRawat;
     private widget.Label jLabel13;
     private widget.Label jLabel15;
     private widget.Label jLabel17;
@@ -14649,3 +14677,4 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnPendaftaran.add(MnPernyataanMemilihDPJP);
     }
 }
+
