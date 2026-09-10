@@ -398,6 +398,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         kdgudang = new widget.TextBox();
         nmgudang = new widget.TextBox();
         BtnGudang = new widget.Button();
+        jLabelAsalResep = new widget.Label();
+        cmbAsalResep = new widget.ComboBox();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -651,7 +653,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         jLabel5.setBounds(4, 10, 68, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-02-2026" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-03-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -783,6 +785,28 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         });
         FormInput.add(BtnGudang);
         BtnGudang.setBounds(332, 40, 28, 23);
+
+        jLabelAsalResep.setText("Asal Resep:");
+        jLabelAsalResep.setName("jLabelAsalResep"); // NOI18N
+        jLabelAsalResep.setPreferredSize(new java.awt.Dimension(50, 23));
+        FormInput.add(jLabelAsalResep);
+        jLabelAsalResep.setBounds(362, 40, 70, 23);
+
+        cmbAsalResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "HCU", "ICU", "Isolasi", "Marwah", "Mina", "Multazam", "Musdalifah", "NICU", "Observasi IGD", "Perinatologi", "PICU", "Raudah", "Shafa", "Tan'im", "VK", "OK", "Zam-Zam Lt.1", "Zam-Zam Lt.2" }));
+        cmbAsalResep.setName("cmbAsalResep"); // NOI18N
+        cmbAsalResep.setPreferredSize(new java.awt.Dimension(100, 23));
+        cmbAsalResep.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbAsalResepItemStateChanged(evt);
+            }
+        });
+        cmbAsalResep.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmbAsalResepKeyPressed(evt);
+            }
+        });
+        FormInput.add(cmbAsalResep);
+        cmbAsalResep.setBounds(435, 40, 130, 23);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -1110,13 +1134,13 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     pscarikapasitas.setString(1,tbObat.getValueAt(i,2).toString());
                                     carikapasitas=pscarikapasitas.executeQuery();
                                     if(carikapasitas.next()){ 
-                                        if(Sequel.menyimpantf2("detail_pemberian_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?","data",14,new String[]{
+                                        if(Sequel.menyimpantf2("detail_pemberian_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","data",15,new String[]{
                                             Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,12).toString(),
                                             tbObat.getValueAt(i,6).toString(),""+(Double.parseDouble(tbObat.getValueAt(i,1).toString())/carikapasitas.getDouble(1)),
                                             tbObat.getValueAt(i,8).toString(),tbObat.getValueAt(i,9).toString(),""+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                 Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
                                                 (Double.parseDouble(tbObat.getValueAt(i,1).toString())/carikapasitas.getDouble(1)))),
-                                            "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString()                            
+                                            "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),cmbAsalResep.getSelectedItem().toString()
                                         })==true){
                                             ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                     Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
@@ -1171,13 +1195,13 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                             sukses=false;
                                         }  
                                     }else{
-                                        if(Sequel.menyimpantf2("detail_pemberian_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?","data",14,new String[]{
+                                        if(Sequel.menyimpantf2("detail_pemberian_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","data",15,new String[]{
                                             Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,12).toString(),
                                             tbObat.getValueAt(i,6).toString(),""+Double.parseDouble(tbObat.getValueAt(i,1).toString()),
                                             tbObat.getValueAt(i,8).toString(),tbObat.getValueAt(i,9).toString(),""+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                 Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
                                                 Double.parseDouble(tbObat.getValueAt(i,1).toString()))),
-                                            "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString() 
+                                            "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),cmbAsalResep.getSelectedItem().toString()
                                         })==true){    
                                             ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                     Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
@@ -1243,13 +1267,13 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     }
                                 }
                             }else{
-                                if(Sequel.menyimpantf2("detail_pemberian_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?","data",14,new String[]{
+                                if(Sequel.menyimpantf2("detail_pemberian_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","data",15,new String[]{
                                     Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,12).toString(),
                                     tbObat.getValueAt(i,6).toString(),""+Double.parseDouble(tbObat.getValueAt(i,1).toString()),
                                     tbObat.getValueAt(i,8).toString(),tbObat.getValueAt(i,9).toString(),""+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                         Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
                                         Double.parseDouble(tbObat.getValueAt(i,1).toString()))),
-                                    "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString() 
+                                    "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),cmbAsalResep.getSelectedItem().toString()
                                 })==true){ 
                                     ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                             Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
@@ -1326,7 +1350,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),
                                tbDetailObatRacikan.getValueAt(i,0).toString(),tbDetailObatRacikan.getValueAt(i,1).toString()
                             })==true){
-                                if(Sequel.menyimpantf2("detail_pemberian_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?","data",14,new String[]{
+                                if(Sequel.menyimpantf2("detail_pemberian_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","data",15,new String[]{
                                     Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),
                                     tbDetailObatRacikan.getValueAt(i,1).toString(),tbDetailObatRacikan.getValueAt(i,5).toString(),
                                     tbDetailObatRacikan.getValueAt(i,4).toString(),""+Double.parseDouble(tbDetailObatRacikan.getValueAt(i,10).toString()),
@@ -1335,7 +1359,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                         Double.parseDouble(tbDetailObatRacikan.getValueAt(i,12).toString())+
                                         (Double.parseDouble(tbDetailObatRacikan.getValueAt(i,4).toString())*
                                         Double.parseDouble(tbDetailObatRacikan.getValueAt(i,10).toString()))),
-                                    "Ranap",kdgudang.getText(),tbDetailObatRacikan.getValueAt(i,16).toString(),tbDetailObatRacikan.getValueAt(i,17).toString()
+                                    "Ranap",kdgudang.getText(),tbDetailObatRacikan.getValueAt(i,16).toString(),tbDetailObatRacikan.getValueAt(i,17).toString(),cmbAsalResep.getSelectedItem().toString()
                                 })==true){
                                     ttljual=ttljual+Math.round(Double.parseDouble(tbDetailObatRacikan.getValueAt(i,11).toString())+
                                             Double.parseDouble(tbDetailObatRacikan.getValueAt(i,12).toString())+(Double.parseDouble(tbDetailObatRacikan.getValueAt(i,4).toString())*
@@ -1392,7 +1416,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     }
                     
                     if(!noresep.equals("")){
-                        Sequel.mengedit("resep_obat","no_resep='"+noresep+"'","tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"',jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"'");
+                        Sequel.mengedit("resep_obat","no_resep='"+noresep+"'","tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"',jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"',asal_resep='"+cmbAsalResep.getSelectedItem().toString()+"'");
                     }
                     
                     if(sukses==true){
@@ -1941,6 +1965,14 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
     }//GEN-LAST:event_formWindowOpened
 
+    private void cmbAsalResepItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAsalResepItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbAsalResepItemStateChanged
+
+    private void cmbAsalResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbAsalResepKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbAsalResepKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1982,11 +2014,13 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
     private javax.swing.JTabbedPane TabRawat;
+    private widget.ComboBox cmbAsalResep;
     private widget.ComboBox cmbDtk;
     private widget.ComboBox cmbJam;
     private widget.ComboBox cmbMnt;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel5;
+    private widget.Label jLabelAsalResep;
     private javax.swing.JPanel jPanel3;
     private widget.TextBox kdgudang;
     private widget.TextBox kelas;

@@ -739,7 +739,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         jLabel8.setBounds(4, 40, 65, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-04-2026" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-09-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -878,7 +878,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         FormInput.add(jLabelAsalResep);
         jLabelAsalResep.setBounds(690, 70, 70, 23);
 
-        cmbAsalResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HCU", "ICU", "Isolasi", "Marwah", "Mina", "Multazam", "Musdalifah", "NICU", "Observasi IGD", "Perinatologi", "PICU", "Raudah", "Shafa", "Tan'im", "VK", "OK", "Zam-Zam Lt.1", "Zam-Zam Lt.2" }));
+        cmbAsalResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "HCU", "ICU", "Isolasi", "Marwah", "Mina", "Multazam", "Musdalifah", "NICU", "Observasi IGD", "Perinatologi", "PICU", "Raudah", "Shafa", "Tan'im", "VK", "OK", "Zam-Zam Lt.1", "Zam-Zam Lt.2" }));
         cmbAsalResep.setName("cmbAsalResep"); // NOI18N
         cmbAsalResep.setPreferredSize(new java.awt.Dimension(100, 23));
         cmbAsalResep.addItemListener(new java.awt.event.ItemListener() {

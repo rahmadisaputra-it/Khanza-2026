@@ -160,7 +160,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         
         tabMode3=new DefaultTableModel(null,new Object[]{
                 "No.Resep","Tgl.Peresepan","Jam Peresepan","No.Rawat","No.RM","Pasien","Dokter Peresep",
-                "Status","Kode Dokter","Ruang/Kamar","Kode Bangsal","Jenis Bayar","Tgl.Validasi","Jam Validasi"
+                "Status","Kode Dokter","Ruang/Kamar","Kode Bangsal","Jenis Bayar","Tgl.Validasi","Jam Validasi","Asal Permintaan"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -4587,7 +4587,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
-                                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam from resep_obat  "+
+                                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam,resep_obat.asal_resep from resep_obat  "+
                                     " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
                                     " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                                     " inner join dokter on resep_obat.kd_dokter=dokter.kd_dokter "+
@@ -4606,7 +4606,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
-                                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam from resep_obat  "+
+                                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam,resep_obat.asal_resep from resep_obat  "+
                                     " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
                                     " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                                     " inner join dokter on resep_obat.kd_dokter=dokter.kd_dokter "+
@@ -4644,7 +4644,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
                                         rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
                                         rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
-                                        rs.getString("tgl_perawatan"),rs.getString("jam")
+                                        rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("asal_resep")
                                     });
                                 }
                             }else{
@@ -4655,7 +4655,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
                                             rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
                                             rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
-                                            rs.getString("tgl_perawatan"),rs.getString("jam")
+                                            rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("asal_resep")
                                         });
                                     }                  
                                 } 
@@ -4677,7 +4677,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
-                                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam from resep_obat  "+
+                                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam,resep_obat.asal_resep from resep_obat  "+
                                     " inner join ranap_gabung on ranap_gabung.no_rawat2=resep_obat.no_rawat "+
                                     " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
                                     " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -4697,7 +4697,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
-                                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam from resep_obat  "+
+                                    " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam,resep_obat.asal_resep from resep_obat  "+
                                     " inner join ranap_gabung on ranap_gabung.no_rawat2=resep_obat.no_rawat "+
                                     " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
                                     " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -4735,7 +4735,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
                                         rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
                                         rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
-                                        rs.getString("tgl_perawatan"),rs.getString("jam")
+                                        rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("asal_resep")
                                     });
                                 } 
                             }else{
@@ -4746,7 +4746,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
                                             rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
                                             rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
-                                            rs.getString("tgl_perawatan"),rs.getString("jam")
+                                            rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("asal_resep")
                                         });
                                     }                  
                                 }

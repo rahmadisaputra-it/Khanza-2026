@@ -717,7 +717,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         FormInput.add(cmbMnt);
         cmbMnt.setBounds(233, 42, 62, 23);
 
-        cmbAsalResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HCU", "ICU", "Isolasi", "Marwah", "Mina", "Multazam", "Musdalifah", "NICU", "Observasi IGD", "Perinatologi", "PICU", "Raudah", "Shafa", "Tan'im", "VK", "OK", "Zam-Zam Lt.1", "Zam-Zam Lt.2" }));
+        cmbAsalResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "HCU", "ICU", "Isolasi", "Marwah", "Mina", "Multazam", "Musdalifah", "NICU", "Observasi IGD", "Perinatologi", "PICU", "Raudah", "Shafa", "Tan'im", "VK", "OK", "Zam-Zam Lt.1", "Zam-Zam Lt.2" }));
         cmbAsalResep.setName("cmbAsalResep"); // NOI18N
         cmbAsalResep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
