@@ -92,7 +92,9 @@ Untuk modul bridging, data `ResultSet` dikonversi ke JSON (Jackson/Gson) lalu di
 - **Monolithic Fat Client** — UI logic, business rule, dan event handling **disatukan dalam satu file** `.java` per form.
 - **Tanpa DAO** — Akses DB via method statis di `fungsi.sekuel` atau native SQL string langsung di event listener. Tidak ada abstraction layer DAO/Repository.
 - **Validasi terpusat** — Semua format input, angka, tanggal, dan combo filler melewati `fungsi.validasi`.
-- **GUI via Builder** — Komponen visual **harus diedit via tab Design NetBeans** (file `.form`). Jangan edit blok `// <editor-fold>` secara manual — akan tertimpa saat regenerate.
+- **GUI via Builder** — Ada dua jenis file `.java` form di project ini, bedakan dulu sebelum edit:
+  - **Ada file `.form` terhubung** (terlihat dari icon design di NetBeans, atau cek `ls NamaFile.*` ada `.form`-nya) → `initComponents()` di-generate otomatis oleh NetBeans GUI Builder. **Jangan pernah edit blok `// <editor-fold> GEN-BEGIN/GEN-END`** — akan tertimpa saat design di-save. Untuk tambah komponen: gunakan tab Design NetBeans, atau tambahkan secara manual **di luar** `initComponents()` (misalnya di constructor atau method `init()` sendiri).
+  - **Tidak ada file `.form`** (cek `ls NamaFile.*` hanya ada `.java`) → `initComponents()` adalah kode manual murni. Meskipun ada marker `GEN-BEGIN/GEN-END`, marker itu **tidak memiliki efek** karena tidak ada `.form` yang akan meregenerate kode. **Aman diedit langsung** di dalam `initComponents()` seperti kode Java biasa.
 - **Naming**: `DlgXxx.java` = dialog form, `MasterXxx.java` = form master data, `ApiXxx.java` = koneksi API.
 
 ---
@@ -104,7 +106,7 @@ Untuk modul bridging, data `ResultSet` dikonversi ke JSON (Jackson/Gson) lalu di
 | `frmUtama.java` (~2.4 MB) | Semua menu terpusat di sini. Edit apapun di sini berdampak sistemik. Compile-time lebih lama. **Wajib konfirmasi sebelum menyentuh.** |
 | SQL statis tersebar | ALTER TABLE wajib diikuti search & replace manual di semua `.java` yang memakai tabel tersebut. |
 | AES Bridging keys | `X-cons-id`, `X-Signature`, secret key tersimpan di `database.xml` (encrypted). Gunakan `KhanzaPengenkripsiTeks` untuk update. |
-| GUI Builder blocks | Blok `// <editor-fold>` auto-generated. Edit komponen visual **hanya via NetBeans Design tab**. |
+| GUI Builder blocks | Blok `// <editor-fold>` **hanya berbahaya jika ada `.form`-nya**. Cek dulu: `ls NamaFile.*` — jika ada `.form`, jangan edit `initComponents()` manual. Jika hanya `.java`, marker GEN tidak aktif dan aman diedit langsung. |
 | Skalabilitas | Pola native SQL statis menyulitkan maintenance jangka panjang — tidak ada unit test, tidak ada abstraction layer. |
 
 ---
@@ -148,7 +150,9 @@ Untuk modul bridging, data `ResultSet` dikonversi ke JSON (Jackson/Gson) lalu di
 
 ## Aturan Wajib untuk Agent
 
-1. **Jangan ubah** blok auto-generated NetBeans GUI Builder (`// <editor-fold>`)
+1. **Cek dulu ada/tidaknya `.form`** sebelum edit `initComponents()`:
+   - Ada `.form` → **Jangan ubah** blok `GEN-BEGIN/GEN-END`, tambahkan komponen di luar `initComponents()` (constructor/method terpisah)
+   - Tidak ada `.form` → **Boleh edit langsung** di dalam `initComponents()`, marker GEN tidak aktif
 2. **Konfirmasi dulu** sebelum menyentuh `frmUtama.java` — dampaknya sistemik
 3. **Selalu gunakan endpoint Dev/Staging** untuk semua testing modul bridging (BPJS/SatuSehat)
 4. **Setiap ubah query SQL** — cek dulu form/file lain yang memanggil tabel yang sama

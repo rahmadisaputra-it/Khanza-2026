@@ -3474,6 +3474,34 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         PanelAccor.add(ChkAccor, java.awt.BorderLayout.EAST);
 
+        // --- Search / filter menu kiri ---
+        final javax.swing.JTextField TFilterMenu = new javax.swing.JTextField();
+        TFilterMenu.setFont(new java.awt.Font("Tahoma", 0, 11));
+        TFilterMenu.setToolTipText("Ketik untuk filter menu...");
+        TFilterMenu.setPreferredSize(new java.awt.Dimension(185, 22));
+        TFilterMenu.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) { doFilter(); }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) { doFilter(); }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { doFilter(); }
+            private void doFilter() {
+                String keyword = TFilterMenu.getText().toLowerCase().trim();
+                for (java.awt.Component c : FormMenu.getComponents()) {
+                    if (c instanceof javax.swing.AbstractButton) {
+                        String label = ((javax.swing.AbstractButton) c).getText().toLowerCase();
+                        c.setVisible(keyword.isEmpty() || label.contains(keyword));
+                    }
+                }
+                FormMenu.revalidate();
+                FormMenu.repaint();
+            }
+        });
+        javax.swing.JPanel pFilterMenu = new javax.swing.JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 3));
+        pFilterMenu.setBackground(new java.awt.Color(255, 255, 255));
+        pFilterMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(200, 200, 200)));
+        pFilterMenu.add(TFilterMenu);
+        PanelAccor.add(pFilterMenu, java.awt.BorderLayout.NORTH);
+        // --- End search filter ---
+
         ScrollMenu.setBorder(null);
         ScrollMenu.setName("ScrollMenu"); 
         ScrollMenu.setOpaque(true);

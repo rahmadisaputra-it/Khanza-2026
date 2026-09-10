@@ -361,13 +361,15 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         DTPBeri = new widget.Tanggal();
         cmbJam = new widget.ComboBox();
         cmbMnt = new widget.ComboBox();
-        cmbDtk = new widget.ComboBox();
+        cmbAsalResep = new widget.ComboBox();
         ChkRM = new widget.CekBox();
         ChkJln = new widget.CekBox();
         jLabel5 = new widget.Label();
         LTotal = new widget.Label();
         jLabel7 = new widget.Label();
         LTotalTagihan = new widget.Label();
+        jLabelAsalResep = new widget.Label();
+        cmbDtk1 = new widget.ComboBox();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbResep = new widget.Table();
@@ -677,7 +679,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2026" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-09-2026" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -715,15 +717,15 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         FormInput.add(cmbMnt);
         cmbMnt.setBounds(233, 42, 62, 23);
 
-        cmbDtk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        cmbDtk.setName("cmbDtk"); // NOI18N
-        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter() {
+        cmbAsalResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HCU", "ICU", "Isolasi", "Marwah", "Mina", "Multazam", "Musdalifah", "NICU", "Observasi IGD", "Perinatologi", "PICU", "Raudah", "Shafa", "Tan'im", "VK", "OK", "Zam-Zam Lt.1", "Zam-Zam Lt.2" }));
+        cmbAsalResep.setName("cmbAsalResep"); // NOI18N
+        cmbAsalResep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmbDtkKeyPressed(evt);
+                cmbAsalResepKeyPressed(evt);
             }
         });
-        FormInput.add(cmbDtk);
-        cmbDtk.setBounds(298, 42, 62, 23);
+        FormInput.add(cmbAsalResep);
+        cmbAsalResep.setBounds(758, 70, 110, 23);
 
         ChkRM.setBorder(null);
         ChkRM.setSelected(true);
@@ -780,7 +782,22 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         LTotalTagihan.setName("LTotalTagihan"); // NOI18N
         LTotalTagihan.setPreferredSize(new java.awt.Dimension(80, 23));
         FormInput.add(LTotalTagihan);
-        LTotalTagihan.setBounds(588, 42, 95, 23);
+        LTotalTagihan.setBounds(590, 40, 95, 23);
+
+        jLabelAsalResep.setText("Asal Resep:");
+        jLabelAsalResep.setName("jLabelAsalResep"); // NOI18N
+        FormInput.add(jLabelAsalResep);
+        jLabelAsalResep.setBounds(680, 70, 72, 23);
+
+        cmbDtk1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        cmbDtk1.setName("cmbDtk1"); // NOI18N
+        cmbDtk1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmbDtk1KeyPressed(evt);
+            }
+        });
+        FormInput.add(cmbDtk1);
+        cmbDtk1.setBounds(298, 42, 62, 23);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -1036,51 +1053,51 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 Sequel.AutoComitFalse();
                 sukses=true;
                 if(ubah==false){
-                    if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
+                    if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
                         NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                        cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
+                        cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),status,"0000-00-00","00:00:00",cmbAsalResep.getSelectedItem().toString()
                         })==true){
                             simpandata();
                     }else{
                         emptTeksobat2();
-                        if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
+                        if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
                             NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                            cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
+                            cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),status,"0000-00-00","00:00:00",cmbAsalResep.getSelectedItem().toString()
                             })==true){
                                 simpandata();
                         }else{
                             emptTeksobat2();
-                            if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
+                            if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
                                 NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
+                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),status,"0000-00-00","00:00:00",cmbAsalResep.getSelectedItem().toString()
                                 })==true){
                                     simpandata();
                             }else{
                                 emptTeksobat2();
-                                if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
+                                if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
                                     NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                                    cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
+                                    cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),status,"0000-00-00","00:00:00",cmbAsalResep.getSelectedItem().toString()
                                     })==true){
                                         simpandata();
                                 }else{
                                     emptTeksobat();
-                                    if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
+                                    if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
                                         NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                                        cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
+                                        cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),status,"0000-00-00","00:00:00",cmbAsalResep.getSelectedItem().toString()
                                         })==true){
                                             simpandata();
                                     }else{
                                         emptTeksobat2();
-                                        if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
+                                        if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
                                             NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                                            cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
+                                            cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),status,"0000-00-00","00:00:00",cmbAsalResep.getSelectedItem().toString()
                                             })==true){
                                                 simpandata();
                                         }else{
                                             emptTeksobat2();
-                                            if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
+                                            if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
                                                 NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
+                                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),status,"0000-00-00","00:00:00",cmbAsalResep.getSelectedItem().toString()
                                                 })==true){
                                                     simpandata();
                                             }else{
@@ -1308,7 +1325,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_btnDokterKeyPressed
 
     private void NoResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoResepKeyPressed
-        Valid.pindah(evt,cmbDtk,KdDokter);
+        Valid.pindah(evt,cmbAsalResep,KdDokter);
     }//GEN-LAST:event_NoResepKeyPressed
 
     private void DTPBeriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPBeriKeyPressed
@@ -1324,12 +1341,12 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_cmbJamKeyPressed
 
     private void cmbMntKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMntKeyPressed
-        Valid.pindah(evt,cmbJam,cmbDtk);
+        Valid.pindah(evt,cmbJam,cmbDtk1);
     }//GEN-LAST:event_cmbMntKeyPressed
 
-    private void cmbDtkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtkKeyPressed
-        Valid.pindah(evt,cmbMnt,NoResep);
-    }//GEN-LAST:event_cmbDtkKeyPressed
+    private void cmbAsalResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbAsalResepKeyPressed
+        Valid.pindah(evt,cmbDtk1,NoResep);
+    }//GEN-LAST:event_cmbAsalResepKeyPressed
 
     private void ChkRMItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkRMItemStateChanged
         if(ChkRM.isSelected()==true){
@@ -1594,6 +1611,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
     }//GEN-LAST:event_formWindowOpened
 
+    private void cmbDtk1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtk1KeyPressed
+        Valid.pindah(evt,cmbMnt,cmbAsalResep);
+    }//GEN-LAST:event_cmbDtk1KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1640,7 +1661,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.TextBox TPasien;
     private javax.swing.JTabbedPane TabRawat;
     private widget.Button btnDokter;
-    private widget.ComboBox cmbDtk;
+    private widget.ComboBox cmbAsalResep;
+    private widget.ComboBox cmbDtk1;
     private widget.ComboBox cmbJam;
     private widget.ComboBox cmbMnt;
     private widget.InternalFrame internalFrame1;
@@ -1651,6 +1673,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
+    private widget.Label jLabelAsalResep;
     private javax.swing.JPanel jPanel3;
     private widget.Label label12;
     private widget.Label label9;
@@ -2126,7 +2149,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 ChkJln.setEnabled(false);
                 cmbJam.setEnabled(false);
                 cmbMnt.setEnabled(false);
-                cmbDtk.setEnabled(false);
+                cmbDtk1.setEnabled(false);
                 ChkRM.setEnabled(false);
                 NoResep.setEnabled(false);
             }
@@ -2140,7 +2163,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         DTPBeri.setDate(tanggal);
         cmbJam.setSelectedItem(jam);
         cmbMnt.setSelectedItem(menit);
-        cmbDtk.setSelectedItem(detik); 
+        cmbDtk1.setSelectedItem(detik); 
         KdDokter.setText(KodeDokter);
         NmDokter.setText(NamaDokter);
         KdPj.setText(Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",norwt));
@@ -2206,7 +2229,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 }else if(ChkJln.isSelected()==false){
                     nilai_jam =cmbJam.getSelectedIndex();
                     nilai_menit =cmbMnt.getSelectedIndex();
-                    nilai_detik =cmbDtk.getSelectedIndex();
+                    nilai_detik =cmbDtk1.getSelectedIndex();
                 }
 
                 // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
@@ -2232,7 +2255,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
                 cmbJam.setSelectedItem(jam);
                 cmbMnt.setSelectedItem(menit);
-                cmbDtk.setSelectedItem(detik);
+                cmbDtk1.setSelectedItem(detik);
             }
         };
         // Timer
