@@ -688,18 +688,20 @@ DPJP]]></text>
 		<band height="120" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
-				<reportElement x="469" y="0" width="86" height="120" uuid="f6e7e47b-c699-4ca0-8da1-4ce409bab270"/>
-				<box>
+				<reportElement x="469" y="0" width="86" height="120" uuid="f6e7e47b-c699-4ca0-8da1-4ce409bab270">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="5">
 					<pen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Top" markup="html">
 					<font fontName="Tahoma" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nm_dokter}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="3" y="0" width="72" height="120" uuid="39cec9e0-1498-44e9-8162-e603786c06b0"/>
-				<box>
+				<box padding="5">
 					<pen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
@@ -709,7 +711,7 @@ DPJP]]></text>
 			</textField>
 			<textField>
 				<reportElement x="75" y="0" width="70" height="120" uuid="c9fe049b-4ab5-4b76-ac1e-73401a8f7fdd"/>
-				<box>
+				<box padding="5">
 					<pen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -718,8 +720,10 @@ DPJP]]></text>
 				<textFieldExpression><![CDATA[$F{nm_poli}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="214" y="0" width="255" height="120" uuid="10bca9cb-bf33-4b01-9bf4-ee8081d5e0f8"/>
-				<box>
+				<reportElement x="214" y="0" width="255" height="120" uuid="10bca9cb-bf33-4b01-9bf4-ee8081d5e0f8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="5">
 					<pen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
@@ -736,7 +740,7 @@ DPJP]]></text>
 			</textField>
 			<textField>
 				<reportElement x="145" y="0" width="69" height="120" uuid="487fe603-e5a0-4182-8dfa-8b8f79fe5155"/>
-				<box>
+				<box padding="5">
 					<pen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
