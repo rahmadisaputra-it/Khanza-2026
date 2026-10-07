@@ -743,10 +743,10 @@ DPJP]]></text>
 				<box padding="5">
 					<pen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 					<font fontName="Tahoma" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{jbtn}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{jbtn} + "<br/><br/>" + $F{nama}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

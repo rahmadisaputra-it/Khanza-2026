@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.5.1  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0bf46801-580a-469b-99ba-e103c2a475e1">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
@@ -720,7 +720,7 @@
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<summary>
-		<band height="128" splitType="Stretch">
+		<band height="187" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
 				<reportElement mode="Opaque" x="176" y="0" width="379" height="15" forecolor="#FFFFFF" backcolor="#969696" uuid="a5a32d90-8204-4271-8866-b37f73c686a4"/>
@@ -879,6 +879,30 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="2" y="130" width="488" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="ba018ed4-2e79-46b4-93e2-48a91ed0bbaf"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false" isItalic="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Sumber: 1. International Triage Sydtems: Australiasian Triage Systems, Commonwealth of Australia 2009]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="33" y="160" width="488" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="12296d68-7a26-4951-9f7e-3209ce3ae574"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false" isItalic="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[3. START Adult Triage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="33" y="145" width="488" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="66638afd-4ba4-45be-a881-241d51de30f4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false" isItalic="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[2. Pedoman Pelaksanaan Keperawatan Gwat Darurat Di Rumah Sakit, Direktorat Bina Keperawatan, 2005]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>
