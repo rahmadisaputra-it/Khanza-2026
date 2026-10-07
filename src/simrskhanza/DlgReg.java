@@ -17054,13 +17054,17 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
 
                         try{  
                             if(CrPoli.getText().trim().equals("")&&CrDokter.getText().equals("")&&TCari.equals("")){
-                                ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                                ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+//                                ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
+                                ps.setString(1, new SimpleDateFormat("yyyy-MM-dd").format(DTPCari1.getDate() != null ? DTPCari1.getDate() : new Date()));
+//                                ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+                                ps.setString(2, new SimpleDateFormat("yyyy-MM-dd").format(DTPCari2.getDate() != null ? DTPCari2.getDate() : new Date()));
                             }else{
                                 ps.setString(1,"%"+CrPoli.getText()+"%");
                                 ps.setString(2,"%"+CrDokter.getText()+"%");
-                                ps.setString(3,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                                ps.setString(4,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+//                                ps.setString(3,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
+                                ps.setString(3, new SimpleDateFormat("yyyy-MM-dd").format(DTPCari1.getDate() != null ? DTPCari1.getDate() : new Date()));
+//                                ps.setString(4,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+                                ps.setString(4, new SimpleDateFormat("yyyy-MM-dd").format(DTPCari2.getDate() != null ? DTPCari2.getDate() : new Date()));
                                 ps.setString(5,"%"+TCari.getText().trim()+"%");
                                 ps.setString(6,"%"+TCari.getText().trim()+"%");
                                 ps.setString(7,"%"+TCari.getText().trim()+"%");

@@ -17062,6 +17062,7 @@ CREATE TABLE `penilaian_medis_igd` (
   `lab` text NOT NULL,
   `diagnosis` varchar(500) NOT NULL,
   `tata` text NOT NULL,
+  `tindak_lanjut` enum('Pulang','Rawat','Pulang Paksa','Rujuk','-') NOT NULL DEFAULT '-',
   PRIMARY KEY (`no_rawat`),
   KEY `kd_dokter` (`kd_dokter`),
   CONSTRAINT `penilaian_medis_igd_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,

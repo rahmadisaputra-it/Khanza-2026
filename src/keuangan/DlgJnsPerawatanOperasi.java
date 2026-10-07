@@ -2280,6 +2280,10 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         return BtnKeluar;
     }    
     
+    public void setTabData(){
+        TabRawat.setSelectedIndex(1);
+    }
+    
     public void isCek(){
         BtnSimpan.setEnabled(akses.gettarif_operasi());
         BtnHapus.setEnabled(akses.gettarif_operasi());
