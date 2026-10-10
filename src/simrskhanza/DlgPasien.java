@@ -3848,8 +3848,9 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     DTPDaftar.getSelectedItem().toString().substring(6,10)+"-"+DTPDaftar.getSelectedItem().toString().substring(3,5)+"-"+DTPDaftar.getSelectedItem().toString().substring(0,2),
                     TTlp.getText(),TUmurTh.getText()+" Th "+TUmurBl.getText()+" Bl "+TUmurHr.getText()+" Hr",CMbPnd.getSelectedItem().toString(),CmbKeluarga.getSelectedItem().toString(),Saudara.getText(),
                     Kdpnj.getText(),TNoPeserta.getText(),kdkel,kdkec,kdkab,PekerjaanPj.getText(),AlamatPj.getText(),KelurahanPj.getText(),KecamatanPj.getText(),KabupatenPj.getText(),kdperusahaan.getText(),
-                    kdsuku.getText(),kdbahasa.getText(),kdcacat.getText(),EMail.getText(),NIP.getText(),kdprop,PropinsiPj.getText(),
-                    cmbKepercayaan.getSelectedItem().toString(),txtKepercayaanKet.getText()
+                    kdsuku.getText(),kdbahasa.getText(),kdcacat.getText(),
+                    cmbKepercayaan.getSelectedItem().toString(),txtKepercayaanKet.getText(),
+                    EMail.getText(),NIP.getText(),kdprop,PropinsiPj.getText()
                 })==true){
                 if(akses.getform().equals("DlgReg")){
                     TCari.setText(TNo.getText());
@@ -3880,8 +3881,9 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         DTPDaftar.getSelectedItem().toString().substring(6,10)+"-"+DTPDaftar.getSelectedItem().toString().substring(3,5)+"-"+DTPDaftar.getSelectedItem().toString().substring(0,2),
                         TTlp.getText(),TUmurTh.getText()+" Th "+TUmurBl.getText()+" Bl "+TUmurHr.getText()+" Hr",CMbPnd.getSelectedItem().toString(),CmbKeluarga.getSelectedItem().toString(),Saudara.getText(),
                         Kdpnj.getText(),TNoPeserta.getText(),kdkel,kdkec,kdkab,PekerjaanPj.getText(),AlamatPj.getText(),KelurahanPj.getText(),KecamatanPj.getText(),KabupatenPj.getText(),kdperusahaan.getText(),
-                        kdsuku.getText(),kdbahasa.getText(),kdcacat.getText(),EMail.getText(),NIP.getText(),kdprop,PropinsiPj.getText(),
-                        cmbKepercayaan.getSelectedItem().toString(),txtKepercayaanKet.getText()
+                        kdsuku.getText(),kdbahasa.getText(),kdcacat.getText(),
+                        cmbKepercayaan.getSelectedItem().toString(),txtKepercayaanKet.getText(),
+                        EMail.getText(),NIP.getText(),kdprop,PropinsiPj.getText()
                     })==true){
                     if(akses.getform().equals("DlgReg")){
                         TCari.setText(TNo.getText());
@@ -3912,8 +3914,9 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             DTPDaftar.getSelectedItem().toString().substring(6,10)+"-"+DTPDaftar.getSelectedItem().toString().substring(3,5)+"-"+DTPDaftar.getSelectedItem().toString().substring(0,2),
                             TTlp.getText(),TUmurTh.getText()+" Th "+TUmurBl.getText()+" Bl "+TUmurHr.getText()+" Hr",CMbPnd.getSelectedItem().toString(),CmbKeluarga.getSelectedItem().toString(),Saudara.getText(),
                             Kdpnj.getText(),TNoPeserta.getText(),kdkel,kdkec,kdkab,PekerjaanPj.getText(),AlamatPj.getText(),KelurahanPj.getText(),KecamatanPj.getText(),KabupatenPj.getText(),kdperusahaan.getText(),
-                            kdsuku.getText(),kdbahasa.getText(),kdcacat.getText(),EMail.getText(),NIP.getText(),kdprop,PropinsiPj.getText(),
-                            cmbKepercayaan.getSelectedItem().toString(),txtKepercayaanKet.getText()
+                            kdsuku.getText(),kdbahasa.getText(),kdcacat.getText(),
+                            cmbKepercayaan.getSelectedItem().toString(),txtKepercayaanKet.getText(),
+                            EMail.getText(),NIP.getText(),kdprop,PropinsiPj.getText()
                         })==true){
                         if(akses.getform().equals("DlgReg")){
                             TCari.setText(TNo.getText());
@@ -3944,8 +3947,9 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 DTPDaftar.getSelectedItem().toString().substring(6,10)+"-"+DTPDaftar.getSelectedItem().toString().substring(3,5)+"-"+DTPDaftar.getSelectedItem().toString().substring(0,2),
                                 TTlp.getText(),TUmurTh.getText()+" Th "+TUmurBl.getText()+" Bl "+TUmurHr.getText()+" Hr",CMbPnd.getSelectedItem().toString(),CmbKeluarga.getSelectedItem().toString(),Saudara.getText(),
                                 Kdpnj.getText(),TNoPeserta.getText(),kdkel,kdkec,kdkab,PekerjaanPj.getText(),AlamatPj.getText(),KelurahanPj.getText(),KecamatanPj.getText(),KabupatenPj.getText(),kdperusahaan.getText(),
-                                kdsuku.getText(),kdbahasa.getText(),kdcacat.getText(),EMail.getText(),NIP.getText(),kdprop,PropinsiPj.getText(),
-                                cmbKepercayaan.getSelectedItem().toString(),txtKepercayaanKet.getText()
+                                kdsuku.getText(),kdbahasa.getText(),kdcacat.getText(),
+                                cmbKepercayaan.getSelectedItem().toString(),txtKepercayaanKet.getText(),
+                                EMail.getText(),NIP.getText(),kdprop,PropinsiPj.getText()
                             })==true){
                             if(akses.getform().equals("DlgReg")){
                                 TCari.setText(TNo.getText());
@@ -3976,8 +3980,9 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     DTPDaftar.getSelectedItem().toString().substring(6,10)+"-"+DTPDaftar.getSelectedItem().toString().substring(3,5)+"-"+DTPDaftar.getSelectedItem().toString().substring(0,2),
                                     TTlp.getText(),TUmurTh.getText()+" Th "+TUmurBl.getText()+" Bl "+TUmurHr.getText()+" Hr",CMbPnd.getSelectedItem().toString(),CmbKeluarga.getSelectedItem().toString(),Saudara.getText(),
                                     Kdpnj.getText(),TNoPeserta.getText(),kdkel,kdkec,kdkab,PekerjaanPj.getText(),AlamatPj.getText(),KelurahanPj.getText(),KecamatanPj.getText(),KabupatenPj.getText(),kdperusahaan.getText(),
-                                    kdsuku.getText(),kdbahasa.getText(),kdcacat.getText(),EMail.getText(),NIP.getText(),kdprop,PropinsiPj.getText(),
-                                    cmbKepercayaan.getSelectedItem().toString(),txtKepercayaanKet.getText()
+                                    kdsuku.getText(),kdbahasa.getText(),kdcacat.getText(),
+                                    cmbKepercayaan.getSelectedItem().toString(),txtKepercayaanKet.getText(),
+                                    EMail.getText(),NIP.getText(),kdprop,PropinsiPj.getText()
                                 })==true){
                                 if(akses.getform().equals("DlgReg")){
                                     TCari.setText(TNo.getText());
