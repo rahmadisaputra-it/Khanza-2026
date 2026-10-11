@@ -61,6 +61,8 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
     private boolean sukses=false,ubah=false;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+    private widget.Label jLabelAsalResep;
+    private widget.ComboBox cmbAsalResep;
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -145,6 +147,33 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
         } catch (Exception e) {
             hppfarmasi="dasar";
         }
+        
+        initAsalResep();
+    }
+    
+    private void initAsalResep() {
+        jLabelAsalResep = new widget.Label();
+        jLabelAsalResep.setText("Asal Resep :");
+        jLabelAsalResep.setName("jLabelAsalResep");
+        FormInput.add(jLabelAsalResep);
+        jLabelAsalResep.setBounds(0, 102, 72, 23);
+
+        cmbAsalResep = new widget.ComboBox();
+        cmbAsalResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { 
+            "-", "HCU", "ICU", "Isolasi", "Marwah", "Mina", "Multazam", "Musdalifah", 
+            "NICU", "Observasi IGD", "Perinatologi", "PICU", "Raudah", "Shafa", "Tan'im", "VK", "OK" 
+        }));
+        cmbAsalResep.setName("cmbAsalResep");
+        cmbAsalResep.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Valid.pindah(evt, cmbDtk, NoResep);
+            }
+        });
+        FormInput.add(cmbAsalResep);
+        cmbAsalResep.setBounds(75, 102, 140, 23);
+        
+        FormInput.setPreferredSize(new Dimension(FormInput.getPreferredSize().width, 137));
     }
     
 
@@ -628,20 +657,20 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         sukses=true;
                         
                         if(ubah==false){
-                            if(Sequel.menyimpantf2("permintaan_resep_pulang","?,?,?,?,?,?,'0000-00-00','00:00:00'","Nomer Permintaan",6,new String[]{
-                                    NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum"
+                            if(Sequel.menyimpantf2("permintaan_resep_pulang","?,?,?,?,?,?,'0000-00-00','00:00:00',?","Nomer Permintaan",7,new String[]{
+                                    NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum",cmbAsalResep.getSelectedItem().toString()
                                 })==true){
                                 simpandata();
                             }else{
                                 emptTeksobat();
-                                if(Sequel.menyimpantf2("permintaan_resep_pulang","?,?,?,?,?,?,'0000-00-00','00:00:00'","Nomer Permintaan",6,new String[]{
-                                        NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum"
+                                if(Sequel.menyimpantf2("permintaan_resep_pulang","?,?,?,?,?,?,'0000-00-00','00:00:00',?","Nomer Permintaan",7,new String[]{
+                                        NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum",cmbAsalResep.getSelectedItem().toString()
                                     })==true){
                                     simpandata();
                                 }else{
                                     emptTeksobat();
-                                    if(Sequel.menyimpantf2("permintaan_resep_pulang","?,?,?,?,?,?,'0000-00-00','00:00:00'","Nomer Permintaan",6,new String[]{
-                                            NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum"
+                                    if(Sequel.menyimpantf2("permintaan_resep_pulang","?,?,?,?,?,?,'0000-00-00','00:00:00',?","Nomer Permintaan",7,new String[]{
+                                            NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum",cmbAsalResep.getSelectedItem().toString()
                                         })==true){
                                         simpandata();
                                     }else{
@@ -652,6 +681,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             }
                         }else if(ubah==true){
                             Sequel.meghapus("detail_permintaan_resep_pulang","no_permintaan",NoResep.getText());
+                            Sequel.mengedit("permintaan_resep_pulang","no_permintaan='"+NoResep.getText()+"'","asal_resep='"+cmbAsalResep.getSelectedItem().toString()+"'");
                             simpandata();
                         }
                             
@@ -893,7 +923,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_BtnDokterKeyPressed
 
     private void NoResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoResepKeyPressed
-        Valid.pindah(evt,cmbDtk,KdDokter);
+        Valid.pindah(evt,cmbAsalResep,KdDokter);
     }//GEN-LAST:event_NoResepKeyPressed
 
     private void DTPBeriItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPBeriItemStateChanged
@@ -917,7 +947,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_cmbMntKeyPressed
 
     private void cmbDtkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtkKeyPressed
-        Valid.pindah(evt,cmbMnt,NoResep);
+        Valid.pindah(evt,cmbMnt,cmbAsalResep);
     }//GEN-LAST:event_cmbDtkKeyPressed
 
     private void ChkRMItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkRMItemStateChanged
@@ -1279,6 +1309,34 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         kenaikan=Sequel.cariIsiAngka2("select (set_harga_obat_ranap.hargajual/100) from set_harga_obat_ranap where set_harga_obat_ranap.kd_pj=? and set_harga_obat_ranap.kelas=?",KdPj.getText(),kelas);
         TCari.requestFocus();
         ubah=false;
+        cmbAsalResep.setSelectedIndex(0);
+        String nmBangsal = Sequel.cariIsi("select bangsal.nm_bangsal from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.kd_kamar=?", kamar);
+        if(!nmBangsal.equals("")){
+            boolean found = false;
+            for(int k = 0; k < cmbAsalResep.getItemCount(); k++){
+                String item = cmbAsalResep.getItemAt(k).toString();
+                if(!item.equals("-") && nmBangsal.equalsIgnoreCase(item)){
+                    cmbAsalResep.setSelectedIndex(k);
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                for(int k = 0; k < cmbAsalResep.getItemCount(); k++){
+                    String item = cmbAsalResep.getItemAt(k).toString();
+                    if(!item.equals("-") && nmBangsal.toLowerCase().contains(item.toLowerCase())){
+                        cmbAsalResep.setSelectedIndex(k);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void setAsalResep(String asal_resep) {
+        if (!asal_resep.equals("")) {
+            cmbAsalResep.setSelectedItem(asal_resep);
+        }
     }
 
     private void getData() {
@@ -1396,6 +1454,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private void tampilObat(String no_permintaan) {
         NoResep.setText(no_permintaan);
         ubah=true;
+        String asal = Sequel.cariIsi("select asal_resep from permintaan_resep_pulang where no_permintaan=?", no_permintaan);
+        if(!asal.equals("")){
+            cmbAsalResep.setSelectedItem(asal);
+        }
         try{  
             Valid.tabelKosong(tabMode);
             if(kenaikan>0){

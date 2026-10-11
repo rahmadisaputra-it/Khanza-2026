@@ -119,7 +119,43 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
             System.out.println("E : "+e);
             aktifkanbatch = "no";
         }
+        
+        initAsalResep();
     }
+    
+    private widget.Label labelAsalResep;
+    private widget.ComboBox cmbAsalResep;
+    
+    private void initAsalResep() {
+        labelAsalResep = new widget.Label();
+        labelAsalResep.setText("Asal Resep :");
+        labelAsalResep.setName("labelAsalResep");
+        labelAsalResep.setPreferredSize(new Dimension(70, 23));
+
+        cmbAsalResep = new widget.ComboBox();
+        cmbAsalResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { 
+            "-", "HCU", "ICU", "Isolasi", "Marwah", "Mina", "Multazam", "Musdalifah", 
+            "NICU", "Observasi IGD", "Perinatologi", "PICU", "Raudah", "Shafa", "Tan'im", "VK", "OK" 
+        }));
+        cmbAsalResep.setName("cmbAsalResep");
+        cmbAsalResep.setPreferredSize(new Dimension(110, 23));
+        cmbAsalResep.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Valid.pindah(evt, Jeniskelas, BtnKeluar);
+            }
+        });
+        
+        int idx = panelisi3.getComponentZOrder(BtnKeluar);
+        if (idx >= 0) {
+            panelisi3.add(labelAsalResep, idx);
+            panelisi3.add(cmbAsalResep, idx + 1);
+        } else {
+            panelisi3.add(labelAsalResep);
+            panelisi3.add(cmbAsalResep);
+        }
+    }
+    
     private double y=0,stokbarang=0,kenaikan=0;
     private int jml=0,i=0,index;
     private double[] jumlah,harga,stok;
@@ -472,11 +508,11 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         sukses=true;
         for(i=0;i<tbKamar.getRowCount();i++){ 
             if(Valid.SetAngka(tbKamar.getValueAt(i,0).toString())>0){
-                if(Sequel.menyimpantf("resep_pulang","?,?,?,?,?,?,?,?,?,?,?","data",11,new String[]{
+                if(Sequel.menyimpantf("resep_pulang","?,?,?,?,?,?,?,?,?,?,?,?","data",12,new String[]{
                         TNoRw.getText(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,0).toString(),
                         tbKamar.getValueAt(i,6).toString(),""+Double.parseDouble(tbKamar.getValueAt(i,6).toString())*Double.parseDouble(tbKamar.getValueAt(i,0).toString()),
                         tbKamar.getValueAt(i,4).toString(),Tanggal.getText(),Jam.getText(),kdgudang.getText(),
-                        tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString()
+                        tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),cmbAsalResep.getSelectedItem().toString()
                     })==true){
                         if(aktifkanbatch.equals("yes")){
                             Sequel.mengedit3("data_batch","no_batch=? and kode_brng=? and no_faktur=?","sisa=sisa-?",4,new String[]{
@@ -606,7 +642,7 @@ private void JeniskelasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
 }//GEN-LAST:event_JeniskelasItemStateChanged
 
 private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JeniskelasKeyPressed
-        Valid.pindah(evt, TCari,BtnKeluar);
+        Valid.pindah(evt, TCari,cmbAsalResep);
 }//GEN-LAST:event_JeniskelasKeyPressed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -1086,10 +1122,51 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }        
         kenaikan=Sequel.cariIsiAngka("select (set_harga_obat_ranap.hargajual/100) from set_harga_obat_ranap where set_harga_obat_ranap.kd_pj='"+KdPj.getText()+"' and set_harga_obat_ranap.kelas='"+kelas.getText()+"'");
         this.nopermintaan="";
+        cmbAsalResep.setSelectedIndex(0);
+        String norawatibu = Sequel.cariIsi("select ranap_gabung.no_rawat from ranap_gabung where ranap_gabung.no_rawat2=?", norwt);
+        String kamar = "";
+        if(!norawatibu.equals("")){
+            kamar = Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1", norawatibu);
+        }else{
+            kamar = Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1", norwt);
+        }
+        String nmBangsal = Sequel.cariIsi("select bangsal.nm_bangsal from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.kd_kamar=?", kamar);
+        if(!nmBangsal.equals("")){
+            boolean found = false;
+            for(int k = 0; k < cmbAsalResep.getItemCount(); k++){
+                String item = cmbAsalResep.getItemAt(k).toString();
+                if(!item.equals("-") && nmBangsal.equalsIgnoreCase(item)){
+                    cmbAsalResep.setSelectedIndex(k);
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                for(int k = 0; k < cmbAsalResep.getItemCount(); k++){
+                    String item = cmbAsalResep.getItemAt(k).toString();
+                    if(!item.equals("-") && nmBangsal.toLowerCase().contains(item.toLowerCase())){
+                        cmbAsalResep.setSelectedIndex(k);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    public void setAsalResep(String asal_resep) {
+        if (!asal_resep.equals("")) {
+            cmbAsalResep.setSelectedItem(asal_resep);
+        }
     }
     
     private void tampil2(String nopermintaan) {
         this.nopermintaan=nopermintaan;
+        if(!nopermintaan.equals("")){
+            String asal = Sequel.cariIsi("select asal_resep from permintaan_resep_pulang where no_permintaan=?", nopermintaan);
+            if(!asal.equals("")){
+                cmbAsalResep.setSelectedItem(asal);
+            }
+        }
         Valid.tabelKosong(tabMode);
         try{
             if(aktifkanbatch.equals("yes")){

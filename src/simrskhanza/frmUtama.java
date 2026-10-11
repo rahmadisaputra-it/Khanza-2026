@@ -275,6 +275,8 @@ import keuangan.DlgRekeningTahun;
 import bridging.ReklasifikasiRalan;
 import bridging.ReklasifikasiRanap;
 import bridging.SiranapKetersediaanKamar;
+import bridging.SIRSMapingKamar;
+import bridging.SIRSUpdateKamar;
 import bridging.SisruteCekReferensiAlasanRujuk;
 import bridging.SisruteCekReferensiDiagnosa;
 import bridging.SisruteCekReferensiFaskes;
@@ -23982,6 +23984,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig btnSetupTarif;
     private widget.ButtonBig btnSidikJari;
     private widget.ButtonBig btnSiranapKetersediaanKamar;
+    private widget.ButtonBig btnSIRSMapingKamar;
+    private widget.ButtonBig btnSIRSUpdateKamar;
     private widget.ButtonBig btnSirkulasi;
     private widget.ButtonBig btnSirkulasi2;
     private widget.ButtonBig btnSirkulasi3;
@@ -27544,6 +27548,10 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getsiranap_ketersediaan_kamar()==true){
                 Panelmenu.add(btnSiranapKetersediaanKamar);
+                jmlmenu++;
+                Panelmenu.add(btnSIRSMapingKamar);
+                jmlmenu++;
+                Panelmenu.add(btnSIRSUpdateKamar);
                 jmlmenu++;
             }
             
@@ -33503,6 +33511,10 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
         if(akses.getsiranap_ketersediaan_kamar()==true){
             Panelmenu.add(btnSiranapKetersediaanKamar);
+            jmlmenu++;
+            Panelmenu.add(btnSIRSMapingKamar);
+            jmlmenu++;
+            Panelmenu.add(btnSIRSUpdateKamar);
             jmlmenu++;
         }
         
@@ -40725,6 +40737,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getsiranap_ketersediaan_kamar()==true){
             if(btnSiranapKetersediaanKamar.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSiranapKetersediaanKamar);
+                jmlmenu++;
+            }                
+            if(btnSIRSMapingKamar.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSIRSMapingKamar);
+                jmlmenu++;
+            }                
+            if(btnSIRSUpdateKamar.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSIRSUpdateKamar);
                 jmlmenu++;
             }                
         }
@@ -50489,5 +50509,43 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSuratKeteranganBerobat.setName("btnSuratKeteranganBerobat");
         btnSuratKeteranganBerobat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratKeteranganBerobat.addActionListener(this::btnSuratKeteranganBerobatActionPerformed);
+        
+        btnSIRSMapingKamar = new widget.ButtonBig();
+        btnSIRSMapingKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357524_Company.png")));
+        btnSIRSMapingKamar.setText("Mapping Kamar SIRS Online");
+        btnSIRSMapingKamar.setIconTextGap(0);
+        btnSIRSMapingKamar.setName("btnSIRSMapingKamar");
+        btnSIRSMapingKamar.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSIRSMapingKamar.addActionListener(this::btnSIRSMapingKamarActionPerformed);
+        
+        btnSIRSUpdateKamar = new widget.ButtonBig();
+        btnSIRSUpdateKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357524_Company.png")));
+        btnSIRSUpdateKamar.setText("Update Kamar SIRS Online");
+        btnSIRSUpdateKamar.setIconTextGap(0);
+        btnSIRSUpdateKamar.setName("btnSIRSUpdateKamar");
+        btnSIRSUpdateKamar.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSIRSUpdateKamar.addActionListener(this::btnSIRSUpdateKamarActionPerformed);
+    }
+
+    private void btnSIRSMapingKamarActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SIRSMapingKamar form = new SIRSMapingKamar(this, false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSIRSUpdateKamarActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SIRSUpdateKamar form = new SIRSUpdateKamar(this, false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
     }
 }

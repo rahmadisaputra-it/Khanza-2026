@@ -1126,6 +1126,7 @@ public final class DlgReg extends javax.swing.JDialog {
         tbPetugas = new widget.Table();
         Scroll1 = new widget.ScrollPane();
         tbPetugas2 = new widget.Table();
+        BtnKirimBerkas = new widget.Button();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -6176,6 +6177,24 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         panelGlass6.add(BtnKeluar);
+        
+        BtnKirimBerkas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/add-file-16x16.png"))); // NOI18N
+        BtnKirimBerkas.setMnemonic('S');
+        BtnKirimBerkas.setText("Kirim Berkas");
+        BtnKirimBerkas.setToolTipText("Alt+S");
+        BtnKirimBerkas.setName("BtnKirimBerkas"); // NOI18N
+        BtnKirimBerkas.setPreferredSize(new java.awt.Dimension(120, 30));
+        BtnKirimBerkas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimBerkasActionPerformed(evt);
+            }
+        });
+        BtnKirimBerkas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnKirimBerkasKeyPressed(evt);
+            }
+        });
+        panelGlass6.add(BtnKirimBerkas);
 
         jPanel2.add(panelGlass6, java.awt.BorderLayout.PAGE_END);
 
@@ -6978,6 +6997,29 @@ public final class DlgReg extends javax.swing.JDialog {
             BtnKeluarActionPerformed(null);
         }else{Valid.pindah(evt,BtnPrint,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
+    
+    private void BtnKirimBerkasActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan mengklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            Sequel.menyimpan("mutasi_berkas",
+                "'"+TNoRw.getText()+"','Sudah Dikirim',now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'",
+                "status='Sudah Dikirim',dikirim=now()",
+                "no_rawat='"+TNoRw.getText()+"'");
+            JOptionPane.showMessageDialog(null,"Berkas rekam medis No.Rawat "+TNoRw.getText()+" berhasil dikirim...!");
+        }
+    }
+
+    private void BtnKirimBerkasKeyPressed(java.awt.event.KeyEvent evt) {
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnKirimBerkasActionPerformed(null);
+        }else{
+            Valid.pindah(evt,BtnKeluar,BtnSimpan);
+        }
+    }
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         CrPoli.setText("");
@@ -16634,6 +16676,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.TextBox Kelurahan2;
     private widget.Label LCount;
     private widget.Label LabelCatatan;
+    private widget.Button BtnKirimBerkas;
     private javax.swing.JMenu MenuInputData;
     private javax.swing.JMenu MenuInputData1;
     private javax.swing.JMenu MnAwalKeperawatan;
