@@ -20,15 +20,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/simrskhanza/DlgIGD.java</file>
-            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/simrskhanza/DlgReg.java</file>
-            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/simrskhanza/DlgRawatJalan.java</file>
-            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/bridging/InhealthTagihan.java</file>
-            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/fungsi/akses.java</file>
-            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/rekammedis/RMPenilaianAwalMedisIGD.java</file>
-            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/rekammedis/RMTriaseIGD.java</file>
-            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/rekammedis/RMPenilaianAwalKeperawatanIGD.java</file>
-            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/simrskhanza/DlgKasirRalan.java</file>
+            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/bridging/ApiKemenkesSirs.java</file>
+            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/bridging/ApiKemenkesSisrute.java</file>
+            <file>file:/D:/workspace/build-khanza/Khanza-2026/src/bridging/ApiKemenkesSITT.java</file>
+            <file>file:/D:/workspace/build-khanza/Khanza-2026/setting/database.xml</file>
         </group>
     </open-files>
 </project-private>

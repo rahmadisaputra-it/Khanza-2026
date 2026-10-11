@@ -3,16 +3,21 @@
 <properties>
     <comment>KhanzaHMS</comment> 
     <entry key="HOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
-    <entry key="DATABASE">AZHNccBwSmSho84f+X8GyQ==</entry>  <!--AZHNccBwSmSho84f+X8GyQ==--> <!--lgjgxGEqkElpFNwE4g7g5A==-->
+    <entry key="DATABASE">6KDB42qC9XuKwvjcqEickg==</entry>  AZHNccBwSmSho84f+X8GyQ== lgjgxGEqkElpFNwE4g7g5A==
     <entry key="PORT">nioxtijcpDaKSUiUiP5FAg==</entry>
     <entry key="USER">kMR3WfAwUK6MbhCyydxa0g==</entry>
     <entry key="PAS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+<!--    <entry key="HOST">dS6bct+YbYLcoqODrD3pfA==</entry>
+    <entry key="DATABASE">AZHNccBwSmSho84f+X8GyQ==</entry>
+    <entry key="PORT">nioxtijcpDaKSUiUiP5FAg==</entry>
+    <entry key="USER">2mkF55dmPe77qzcLrgVgTg==</entry>
+    <entry key="PAS">q5WMtb0ZQWX510JzSoYQe69acAI/EP++pSDTOAkiAjM=</entry>-->
     <entry key="CARICEPAT">nonaktif</entry>
     <entry key="HOSTHYBRIDWEB">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="USERHYBRIDWEB">nmXqCKzrz9i8GTZlq7JruQ==</entry>
     <entry key="PASHYBRIDWEB">AsJ/0/gCnYnD+gK4fw9uKA==</entry>
     <entry key="HYBRIDWEB">webapps</entry>
-    <entry key="PORTWEB">8080</entry>
+    <entry key="PORTWEB">80</entry>
     <entry key="AKTIFKANWARNARALAN">no</entry>
     <entry key="ANTRIAN">player</entry>
     <entry key="LOKETANTRIAN">1</entry>
